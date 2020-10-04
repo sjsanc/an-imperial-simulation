@@ -1,0 +1,28 @@
+export const NAMES = {
+  first: [
+    "Ash",
+    "Nah",
+    "Nahna",
+    "Dor",
+    "Gaen",
+    "She",
+    "Cath",
+    "Nuru",
+    "Naer",
+    "Lure",
+    "Geth",
+  ],
+  second: [
+    "agthem",
+    "kathem",
+    "nara",
+    "ada",
+    "tur",
+    "kol",
+    "olath",
+    "urun",
+    "ege",
+    "ur",
+  ],
+  third: ["athex", "garam", "voroth", "braex", "aggem"],
+};

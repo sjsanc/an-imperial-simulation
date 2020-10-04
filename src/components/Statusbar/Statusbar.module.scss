@@ -1,0 +1,39 @@
+@import "../../global_styles/colors.scss";
+
+.statusbar {
+  position: fixed;
+  top: 39px;
+  left: 0;
+  right: 0;
+  height: 22px;
+  background: $dark1;
+  border-bottom: 1px solid rgb(41, 41, 41);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  z-index: 5;
+  font-family: sans-serif;
+  font-size: 11px;
+}
+.demographicStats {
+  padding: 0 10px;
+  height: 22px;
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    border-bottom: 1px solid white;
+    cursor: pointer;
+    // https://codepen.io/mxttsco/pen/KgodYm <-- do this at some point
+  }
+
+  span {
+    margin: 0 4px;
+  }
+}
+.demoAble {
+  color: rgb(252, 252, 88);
+}
+.demoEmploy {
+  color: rgb(252, 89, 252);
+}

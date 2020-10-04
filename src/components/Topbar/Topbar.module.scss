@@ -1,0 +1,79 @@
+@import "../../global_styles/colors.scss";
+
+.topbar {
+  position: fixed;
+  height: 29px;
+  z-index: 5;
+  width: 100%;
+  background: $dark2;
+  display: flex;
+  padding: 5px;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgb(20, 20, 20);
+  box-shadow: 0 0 8px rgb(17, 17, 17);
+}
+
+.brand {
+  border-radius: 5px;
+  font-family: "Medula One", sans-serif;
+  font-size: 30px;
+  color: $yellow;
+  text-shadow: 0 0 10px black;
+  position: absolute;
+}
+.links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-left: 200px;
+
+  a {
+    font-size: 20px;
+    font-family: "Medula One", sans-serif;
+    margin: 0 5px;
+  }
+
+  a:hover {
+    cursor: pointer;
+    text-decoration: underline;
+  }
+}
+.timeControls {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  margin-left: auto;
+  margin-right: auto;
+}
+.control {
+  height: 15px;
+  width: 15px;
+  color: $dark1;
+  padding: 5px;
+  border-radius: 5px;
+  margin: 0 3px;
+
+  &:hover {
+    cursor: pointer;
+    background: $dark4;
+  }
+}
+.active {
+  color: $snow2;
+  background-color: $dark3;
+}
+
+.timeDisplay {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: column;
+  margin-right: 10px;
+  font-size: 12px;
+  font-family: sans-serif;
+  width: 200px;
+
+  .ticks {
+    font-size: 9px;
+  }
+}

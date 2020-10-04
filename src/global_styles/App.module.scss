@@ -1,0 +1,66 @@
+@import "./colors.scss";
+@import url("https://fonts.googleapis.com/css2?family=Medula+One&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300&display=swap");
+
+.wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: $dark;
+  color: white;
+}
+
+.centreWrapper {
+  margin-top: 50px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+
+.leftPanel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  // background-color: $dark2;
+}
+
+.rightPanel {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  width: 300px;
+  // background-color: $dark2;
+}
+.centerPanel {
+  position: absolute;
+  left: 300px;
+  right: 300px;
+  min-width: 300px;
+  top: 50px;
+  bottom: 50px;
+  // background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.botbar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 50px;
+  // background: $dark4;
+}
+
+// DEBUG
+.DEBUG-BUTTON {
+  height: 35px;
+  width: 35px;
+  background: purple;
+}

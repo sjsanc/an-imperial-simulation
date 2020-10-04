@@ -1,0 +1,25 @@
+.rect {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hello {
+  border: 0;
+  padding: 8px;
+  border-radius: 5px;
+  transition: 0.3s ease-in-out;
+  margin-right: 10px;
+
+  &:hover {
+    background: rgb(180, 175, 175);
+    transition: 0.3s ease-in-out;
+  }
+}
+
+.mult {
+  background: red;
+}
+.divide {
+  background: blue;
+}
