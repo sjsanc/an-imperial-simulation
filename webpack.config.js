@@ -15,6 +15,11 @@ module.exports = {
   },
   devServer: {
     disableHostCheck: true,
+    watchOptions: {
+      aggregateTimeout: 200,
+      poll: 1000,
+      ignored: /node_modules/,
+    },
   },
   module: {
     rules: [
@@ -56,6 +61,7 @@ module.exports = {
     new HtmlWebPackPlugin({
       template: "./public/index.html",
     }),
-    new BundleAnalyzerPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
+  cache: true,
 };

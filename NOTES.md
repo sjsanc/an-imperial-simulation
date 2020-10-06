@@ -19,6 +19,8 @@
   > Dispatch: instruction that updates state
   > Selectors: functions for extracting specific state info
 
+  > https://immerjs.github.io/immer/docs/return HOW TO RETURN REDUCERS
+
 - POPULATION
   > Age increments with ticks per person
   > Vitality is a roll modifer for health

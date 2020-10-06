@@ -1,0 +1,21 @@
+@import "../../global_styles/colors.scss";
+
+.infobox {
+  height: 200px;
+  width: 100%;
+  background: $dark0;
+  position: absolute;
+  bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  div {
+    &:first-of-type {
+      width: 97%;
+      height: 85%;
+      border-radius: 10px;
+      background: $dark1;
+    }
+  }
+}

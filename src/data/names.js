@@ -2,7 +2,7 @@ export const NAMES = {
   first: [
     "Ash",
     "Nah",
-    "Nahna",
+    "Nahn",
     "Dor",
     "Gaen",
     "She",

@@ -1,9 +1,9 @@
-let Dataset = [];
+let dataset = [];
 
 const Data = function (obj) {
-  this.quanity = 0;
+  this.quantity = 0;
   for (var i in obj) this[i] = obj[i];
-  Dataset.push(this);
+  dataset.push(this);
 };
 
 // FOOD
@@ -22,4 +22,4 @@ new Data({
   type: "material",
 });
 
-export default Dataset;
+export default dataset;

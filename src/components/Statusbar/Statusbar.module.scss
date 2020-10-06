@@ -1,5 +1,9 @@
 @import "../../global_styles/colors.scss";
 
+@mixin panel-transition {
+  transition: 0.2s ease-in-out;
+}
+
 .statusbar {
   position: fixed;
   top: 39px;
@@ -8,32 +12,114 @@
   height: 22px;
   background: $dark1;
   border-bottom: 1px solid rgb(41, 41, 41);
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  z-index: 5;
   font-family: sans-serif;
   font-size: 11px;
+  z-index: 2;
 }
-.demographicStats {
-  padding: 0 10px;
+.hudtray {
+  top: 39px;
+  left: 0;
+  right: 0;
   height: 22px;
   display: flex;
   align-items: center;
+  justify-self: start;
+}
+.hud {
+  height: 100%;
+  min-width: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   &:hover {
-    border-bottom: 1px solid white;
+    background: $dark0;
     cursor: pointer;
-    // https://codepen.io/mxttsco/pen/KgodYm <-- do this at some point
   }
 
-  span {
-    margin: 0 4px;
+  p {
+    text-shadow: 0 0 5px black;
   }
 }
-.demoAble {
-  color: rgb(252, 252, 88);
+.paneltray {
+  position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
 }
-.demoEmploy {
-  color: rgb(252, 89, 252);
+
+@mixin panel {
+  position: absolute;
+  // width: 130px;
+  left: 0;
+  top: 0;
+  height: 0px;
+  background: $dark1;
+  transition: 0.3s ease-in-out;
+  text-shadow: 0 0 5px black;
+}
+
+.panelContent {
+  transition-delay: 0.5s;
+  transition: 0.3s ease-in-out;
+  visibility: hidden;
+  opacity: 0;
+  padding: 3px;
+}
+
+// DEMOHUD
+$demoWidth: 150px;
+.demoPanel {
+  @include panel;
+  width: $demoWidth;
+  border-bottom: 1px solid yellow;
+}
+
+.demoHud {
+  width: $demoWidth;
+}
+.demoHudStats {
+  margin-left: 3px;
+  display: flex;
+  align-items: center;
+
+  div {
+    margin: 0 3px;
+
+    &:nth-of-type(2) {
+      color: rgb(243, 243, 114);
+    }
+    &:last-of-type {
+      color: #e95de9;
+    }
+  }
+}
+.demoContent {
+  p {
+    &:first-of-type {
+      text-align: center;
+      color: rgb(122, 120, 120);
+      font-style: italic;
+      margin: 0;
+    }
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    width: 70%;
+    margin: 0 auto;
+    justify-content: space-between;
+  }
+}
+
+// EFFECT NEEDS TO GO AT END
+.panelVisible {
+  height: 100px;
+  transition: 0.3s ease-in-out;
+}
+.contentVisible {
+  transition: 0.2s ease-in-out;
+  visibility: visible;
+  opacity: 100;
 }

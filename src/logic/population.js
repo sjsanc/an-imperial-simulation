@@ -77,3 +77,14 @@ export const createChild = (mods = { vitalityMod: 10 }) => {
     job: "idle",
   };
 };
+
+export const naturalDeath = (elders) => {
+  let id = [];
+  elders.forEach((elder) => {
+    let random = Math.random() * 5;
+    if (random > elder.vitality) {
+      id.push(elder.id);
+    }
+  });
+  return id;
+};
