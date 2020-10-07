@@ -52,9 +52,8 @@ export default function Topbar({ pause, play, fast }) {
         />
       </div>
       <div className={style.timeDisplay}>
-        <div className={style.ticks}>ticks: {time}</div>
         <div>
-          Day {Math.floor(time / 4) % 360}, Year {Math.floor(time / 4 / 360)}
+          Day {time}, Year {Math.floor(time / 360)}
         </div>
       </div>
     </div>

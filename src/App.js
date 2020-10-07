@@ -12,6 +12,7 @@ import Topbar from "./components/Topbar/Topbar";
 import Statusbar from "./components/Statusbar/Statusbar";
 import ResourcePanel from "./components/Resources/ResourcePanel";
 import Infobox from "./components/Infobox/Infobox";
+import MessagePanel from "./components/MessagePanel/MessagePanel";
 
 // reducers
 import { timeActions, selectTime } from "./reducers/timeSlice";
@@ -37,6 +38,7 @@ import {
   birthCohort,
   naturalDeath,
 } from "./logic/population";
+import { emitTestMessage, randomFlavourMessage } from "./logic/messages";
 
 // DEBUG
 console.log(dataset);
@@ -48,6 +50,7 @@ export default function App() {
   const [speed, setSpeed] = useState(1000);
   const [devTools, toggleDevTools] = useState(false);
   const [infobox, setInfobox] = useState(null);
+  const [loaded, setLoaded] = useState(false);
 
   // redux
   const dispatch = useDispatch();
@@ -64,6 +67,12 @@ export default function App() {
     console.log("Game loading...");
     dispatch(populationActions.initialisePop(popSeed));
     dispatch(gameDataActions.initialiseGame(dataset));
+    dispatch(
+      demographicsActions.updateDemographics(
+        demographicBreakdown(population, time, { retirementAge: 45 })
+      )
+    );
+    setLoaded(true);
     console.log("Game started! Have fun!");
   }, []);
 
@@ -87,50 +96,78 @@ export default function App() {
 
   // main game loop
   // https://github.com/facebook/react/issues/14409
+
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Phase 1: update informative states
-      if (controls != "pause") {
-        dispatch(timeActions.incrementTick());
-        dispatch(
-          demographicsActions.updateDemographics(
-            demographicBreakdown(population, time, { retirementAge: 45 })
-          )
-        );
-        dispatch(populationActions.reIndex());
+    if (loaded) {
+      const interval = setInterval(() => {
+        // Phase 1: update informative states
+        if (controls != "pause") {
+          dispatch(timeActions.incrementDay());
 
-        // PER DAY
-        // natural death every day
-        if (time % 4 == 0) {
-          if (demographics.elders != null) {
-            let condemned = naturalDeath(demographics.elders);
-            if (condemned.length > 0) {
-              condemned.forEach((x) => {
-                dispatch(populationActions.death(x));
+          if (time % 3 == 0) {
+            dispatch(
+              demographicsActions.updateDemographics(
+                demographicBreakdown(population, time, { retirementAge: 45 })
+              )
+            );
+          }
+
+          // natural death every month 30
+          if (time % 30 == 0) {
+            setTimeout(() => {
+              if (demographics.elders != null) {
+                let condemned = naturalDeath(demographics.elders);
+                if (condemned.length > 0) {
+                  condemned.forEach((x) => {
+                    dispatch(populationActions.death(x));
+                    dispatch(populationActions.reIndex());
+                    dispatch(
+                      demographicsActions.updateDemographics(
+                        demographicBreakdown(population, time, {
+                          retirementAge: 45,
+                        })
+                      )
+                    );
+                  });
+                }
+              }
+            }, 5000);
+          }
+
+          // childbirth cycles every 90 days
+          if (demographics.adults != null && time % 90 == 0) {
+            setTimeout(() => {
+              let cohortSize = birthCohort(demographics.adults, {
+                fertilityRate: 0.5,
               });
-            }
+              for (let i = 0; i < cohortSize; i++) {
+                dispatch(populationActions.birth(createChild()));
+                dispatch(
+                  demographicsActions.updateDemographics(
+                    demographicBreakdown(population, time, {
+                      retirementAge: 45,
+                    })
+                  )
+                );
+              }
+            }, 5000);
+          }
+
+          // PER YEAR
+          if (time % 360 == 0) {
+            setTimeout(() => {
+              dispatch(populationActions.incrementAge());
+            }, 5000);
+          }
+
+          if (time % 90 == 0 && Math.random() * 10 > 4) {
+            randomFlavourMessage(dispatch, time);
           }
         }
+      }, speed);
 
-        // PER 1/4 YEAR
-        // childbirth cycles every 90 days
-        if (demographics.adults != null && (time / 4) % 90 == 0) {
-          let cohortSize = birthCohort(demographics.adults, {
-            fertilityRate: 0.5,
-          });
-          for (let i = 0; i < cohortSize; i++) {
-            dispatch(populationActions.birth(createChild()));
-          }
-        }
-
-        // PER YEAR
-        if ((time / 4) % 360 == 0) {
-          dispatch(populationActions.incrementAge());
-        }
-      }
-    }, speed);
-
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }
   });
 
   // INFOBOX CLICK HANDLER
@@ -154,7 +191,9 @@ export default function App() {
         <div className={style.centerPanel}>
           <Infobox infobox={infobox} />
         </div>
-        <div className={style.rightPanel}></div>
+        <div className={style.rightPanel}>
+          <MessagePanel />
+        </div>
       </div>
       <div className={style.botbar}>
         <button
@@ -170,7 +209,15 @@ export default function App() {
             ? [style.devtools, style.devtoolsShow].join(" ")
             : style.devtools
         }
-      ></div>
+      >
+        <button
+          onClick={() => {
+            emitTestMessage(dispatch, time);
+          }}
+        >
+          Emit test message
+        </button>
+      </div>
     </div>
   );
 }

@@ -3,7 +3,7 @@
 .resourcePanel {
   height: 100%;
   width: 100%;
-  padding-top: 70px;
+  padding-top: 65px;
   background: $dark0;
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -15,7 +15,7 @@
     font-weight: lighter;
     border-bottom: 1px solid $dark3;
     text-align: center;
-    padding: 0;
+    padding: 0 0 3px 0;
     margin: 0;
   }
 }

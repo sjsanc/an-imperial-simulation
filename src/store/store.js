@@ -5,6 +5,7 @@ import timeControlsReducer from "../reducers/timeControlsSlice";
 import populationReducer from "../reducers/populationSlice";
 import demographicsReducer from "../reducers/demographicsSlice";
 import gameDataReducer from "../reducers/gameDataSlice";
+import messageReducer from "../reducers/messageSlice";
 
 export default configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export default configureStore({
     population: populationReducer,
     demographics: demographicsReducer,
     gameData: gameDataReducer,
+    messages: messageReducer,
   },
   middleware: getDefaultMiddleware({
     serializableCheck: false,

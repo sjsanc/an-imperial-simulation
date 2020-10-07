@@ -1,0 +1,41 @@
+@import "../../global_styles/colors.scss";
+
+.messagePanel {
+  width: 100%;
+  height: 300px;
+  background: $dark1;
+  position: absolute;
+  bottom: 0;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: $dark2 $dark1;
+}
+
+.message {
+  min-height: 20px;
+  width: 100%;
+  border-bottom: 1px solid $dark2;
+  box-shadow: inset 0 0 5px rgb(5, 5, 5);
+  display: flex;
+  align-items: center;
+
+  img {
+    border-radius: 50%;
+    height: 16px;
+    width: 16px;
+    margin: 0 5px 0 3px;
+  }
+
+  p {
+    font-size: 12px;
+    font-family: "Roboto Condensed", sans-serif;
+    margin: 5px;
+    padding: 0;
+    line-height: 11px;
+  }
+
+  &:hover {
+    cursor: pointer;
+    background: $dark2;
+  }
+}

@@ -9,13 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-
-  div {
-    &:first-of-type {
-      width: 97%;
-      height: 85%;
-      border-radius: 10px;
-      background: $dark1;
-    }
-  }
+  flex-direction: column;
+  font-size: 13px;
+  font-family: "Secular One", sans-serif;
 }

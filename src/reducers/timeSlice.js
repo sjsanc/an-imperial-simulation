@@ -6,25 +6,9 @@ export const slice = createSlice({
     value: 0,
   },
   reducers: {
-    incrementTick: (state) => {
+    incrementDay: (state) => {
       // base game rate 1 tick = 1 sec;
       state.value += 1;
-    },
-    incrementDay: (state) => {
-      // 1 day per 4 seconds
-      state.value += 1 * 4;
-    },
-    incrementMonth: (state) => {
-      // 30 days per 1 month
-      state.value += 1 * 4 * 30;
-    },
-    incrementYear: (state) => {
-      // 360 days per 1 year
-      state.value += 1 * 4 * 360;
-    },
-    incrementAge: (state) => {
-      // 500 years to an Age
-      state.value += 1 * 4 * 360 * 500;
     },
   },
 });
