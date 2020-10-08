@@ -12,7 +12,7 @@ export const emitTestMessage = (dispatch, time) => {
   );
 };
 
-export const randomFlavourMessage = (dispatch, time) => {
+export const emitFlavourMsg = (dispatch, time) => {
   dispatch(
     messageActions.createMessage({
       type: "flavour",

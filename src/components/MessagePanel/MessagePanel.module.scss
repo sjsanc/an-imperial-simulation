@@ -3,12 +3,16 @@
 .messagePanel {
   width: 100%;
   height: 300px;
-  background: $dark1;
+  background: $dark0;
   position: absolute;
-  bottom: 0;
+  bottom: 20px;
   overflow-y: scroll;
   scrollbar-width: thin;
   scrollbar-color: $dark2 $dark1;
+  direction: rtl;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 
 .message {
@@ -18,6 +22,7 @@
   box-shadow: inset 0 0 5px rgb(5, 5, 5);
   display: flex;
   align-items: center;
+  direction: ltr;
 
   img {
     border-radius: 50%;

@@ -28,8 +28,8 @@ import {
   demographicsActions,
   selectDemographics,
 } from "./reducers/demographicsSlice";
-
 import { gameDataActions, selectGameData } from "./reducers/gameDataSlice";
+import { messageActions, selectMessages } from "./reducers/messageSlice";
 
 // logic
 import {
@@ -61,6 +61,7 @@ export default function App() {
   const population = useSelector(selectPopulation);
   const demographics = useSelector(selectDemographics);
   const gameData = useSelector(selectGameData);
+  const messages = useSelector(selectMessages);
 
   // On game load
   useEffect(() => {
@@ -158,10 +159,6 @@ export default function App() {
             setTimeout(() => {
               dispatch(populationActions.incrementAge());
             }, 5000);
-          }
-
-          if (time % 90 == 0 && Math.random() * 10 > 4) {
-            randomFlavourMessage(dispatch, time);
           }
         }
       }, speed);

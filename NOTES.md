@@ -27,3 +27,8 @@
   > Names are randomly generated
 
   https://www.deviantart.com/7soul1/art/16x16-RPG-Icons-Pack-1-Free-Sample-467188465
+
+- STRUCTURES
+  > Job => consume + produce
+  > Structure => enable job, modify job
+  > Jobs are set to targets that citizens will try fill up.
