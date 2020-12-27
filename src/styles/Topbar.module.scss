@@ -1,0 +1,102 @@
+@import "colours";
+@import "mixins";
+@import "vars";
+
+.wrapper {
+  background: $base;
+  display: flex;
+  align-items: center;
+  height: $topbarHeight;
+  border: 6px solid $base2;
+  color: $base3;
+  font-size: 14px;
+  font-family: "Bebas Neue", sans-serif;
+
+  div {
+    border-right: 6px solid $base2;
+    background: $base;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+    height: 100%;
+
+    h1 {
+      padding-top: 4px;
+    }
+
+    h2 {
+      // brand
+      padding-top: 4px;
+      font-size: 30px !important;
+    }
+  }
+
+  > div:not(:first-of-type) {
+    // hover on all h1s (buttons)
+    h1 {
+      &:hover {
+        color: white;
+        cursor: pointer;
+      }
+    }
+  }
+
+  > div:nth-of-type(2) {
+    h1 {
+      font-size: 1rem;
+      color: $base3;
+      margin-top: 3px;
+      padding: 0 5px;
+    }
+  }
+}
+
+.pauseBox {
+  width: 90px;
+  @include flex;
+}
+
+.rateBox {
+  width: 130px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yearBox {
+  width: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  span {
+    color: white;
+  }
+}
+
+.popBox {
+  color: white;
+  img {
+    height: 25px;
+    margin-left: 0;
+  }
+
+  div {
+    border: none;
+    margin-right: 5px;
+  }
+}
+
+.active {
+  color: white;
+}
+
+.seasonBox {
+  position: relative;
+}
+
+.seasonBoxCover {
+  position: absolute;
+  left: 5px;
+  color: white;
+}

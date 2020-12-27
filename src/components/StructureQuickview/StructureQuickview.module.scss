@@ -1,0 +1,59 @@
+@import "src/styles/colours";
+@import "src/styles/mixins";
+@import "src/styles/vars";
+
+.wrapper {
+  width: $panelWidth;
+  position: absolute;
+  right: 0;
+  top: $topbarHeight;
+  bottom: 50%;
+  background: $base;
+  overflow-y: scroll;
+  direction: rtl;
+  @include scrollbar;
+}
+
+.subWrapper {
+  display: flex;
+  justify-content: center;
+  direction: ltr;
+}
+
+.structure {
+  height: $panelWidth / 5;
+  width: $panelWidth / 5;
+  @include flex;
+  border: 4px solid $base2;
+  margin: 5px;
+  position: relative;
+  cursor: pointer;
+
+  &:hover {
+    border: 4px solid $base4;
+  }
+
+  img {
+    height: 37px;
+    width: 37px;
+  }
+}
+
+.strAmountIndicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: $base;
+  border-top: 2px solid $base2;
+  border-left: 2px solid $base2;
+  width: 18px;
+  height: 18px;
+  color: white;
+  font-family: "Bebas Neue", sans-serif;
+  font-size: 0.8rem;
+  @include flex;
+}
+
+.available {
+  opacity: 0.1;
+}

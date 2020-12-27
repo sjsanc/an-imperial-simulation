@@ -1,0 +1,35 @@
+@import "colours";
+@import "mixins";
+@import "vars";
+
+.wrapper {
+  position: absolute;
+  left: $panelWidth;
+  right: $panelWidth;
+  bottom: 0;
+  top: $topbarHeight;
+  background: $base1;
+  border: 8px solid $base;
+  padding: 10px;
+  color: white;
+}
+
+.tabbar {
+  width: 100%;
+  @include flex;
+
+  h1 {
+    font-size: 1rem;
+    font-family: "Bebas Neue", sans-serif;
+    margin: 0 10px;
+    color: $base5;
+
+    &:hover {
+      cursor: pointer;
+      color: white;
+    }
+  }
+}
+.active {
+  color: white !important;
+}

@@ -1,0 +1,86 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Fira+Sans+Condensed:ital,wght@0,500;1,500&family=Ubuntu:wght@300&display=swap");
+
+@import "src/styles/colours.scss";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: $base3;
+}
+
+.box {
+  border: 1px solid black;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  margin: 5px 0;
+
+  div {
+    margin: 0 8px;
+  }
+}
+
+@mixin template {
+  border: 1px solid black;
+  padding: 5px;
+  margin: 5px;
+  width: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  border-radius: 4px;
+
+  h1 {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  p {
+    font-size: 0.9em;
+    margin: 0;
+  }
+}
+
+.job {
+  @include template;
+}
+
+.res {
+  @include template;
+}
+
+.person {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 3px;
+  margin: 4px;
+}
+
+.structure {
+  @include template;
+}
+
+.debug {
+  position: absolute;
+  bottom: 20px;
+  right: 50%;
+  color: black;
+  font-family: sans-serif;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  p {
+    color: white;
+  }
+}
+
+.flash {
+  background: $base5 !important;
+  transition: all 2s;
+}

@@ -1,0 +1,101 @@
+@import "src/styles/colours";
+@import "src/styles/mixins";
+@import "src/styles/vars";
+
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70%;
+
+  > div {
+    margin: 0 10px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Bebas Neue", sans-serif;
+  }
+
+  p {
+    font-family: "Ubuntu", sans-serif;
+  }
+}
+
+.cityGraphic {
+  text-align: center;
+  width: 180px;
+  border: 2px solid $base2;
+  padding: 10px;
+
+  > div:first-of-type {
+    height: 90px;
+    width: 90px;
+    margin: 0 auto;
+    position: relative;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin-bottom: 25px;
+  }
+
+  img {
+    position: absolute;
+    left: 8px;
+    bottom: -30px;
+    width: 70px;
+    height: 70px;
+    margin-bottom: 20px;
+    background: $base1;
+  }
+
+  h2 {
+    color: $base4;
+    font-size: 16px;
+    margin: 3px 0;
+  }
+
+  button {
+    margin-top: 10px;
+    @include btn-disabled(24px);
+  }
+}
+
+.resourceBox {
+  width: 100%;
+  height: 120px;
+  background: $base2;
+  border-radius: 4px;
+}
+
+.empireStats {
+  width: 250px;
+  height: 386px;
+  padding: 10px;
+  border: 2px solid $base2;
+
+  > div {
+    padding: 8px;
+    &:hover {
+      background: $base2;
+    }
+  }
+
+  > div div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  p {
+    font-size: 10px;
+  }
+}
+
+.comingSoon {
+  width: 250px;
+  height: 386px;
+  border: 2px solid $base2;
+  font-family: "Bebas Neue", sans-serif;
+  @include flex;
+  color: $base4;
+}

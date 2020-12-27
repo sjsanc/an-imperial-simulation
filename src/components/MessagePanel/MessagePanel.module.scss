@@ -1,0 +1,39 @@
+@import "src/styles/colours";
+@import "src/styles/mixins";
+@import "src/styles/vars";
+
+.wrapper {
+  width: $panelWidth;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  top: 50%;
+  background: $base;
+  overflow-y: scroll;
+  direction: rtl;
+  @include scrollbar;
+  border-top: 8px solid $base2;
+}
+
+.subWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  padding-bottom: 24px;
+  flex-direction: column;
+  direction: ltr;
+}
+
+.message {
+  color: white;
+  min-height: 20px;
+  width: 100%;
+  padding: 4px;
+  background: $base1;
+  border-top: 1px solid $base2;
+  display: flex;
+  align-items: center;
+  font-family: "Ubuntu", sans-serif;
+  font-size: 9px;
+}

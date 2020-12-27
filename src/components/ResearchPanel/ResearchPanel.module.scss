@@ -1,0 +1,99 @@
+@import "src/styles/colours";
+@import "src/styles/mixins";
+@import "src/styles/vars";
+
+.wrapper {
+  padding: 10px;
+  h1,
+  h2 {
+    font-family: "Bebas Neue", sans-serif;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    color: white;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+}
+
+.title {
+  width: 100%;
+  background: $base2;
+  border-radius: 5px;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.grid {
+  width: 100%;
+  min-height: 200px;
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+}
+
+.complete {
+  background: $base;
+  border-radius: 5px;
+  padding: 8px;
+  display: flex;
+  align-items: center;
+  min-height: 65px;
+
+  > div {
+    height: 45px;
+    width: 45px;
+    margin-right: 4px;
+    border: 1px solid $base6;
+    border-radius: 3px;
+    background: $base3;
+  }
+}
+
+.availableWrapper {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+
+  > div {
+    margin: 0 10px 10px 0;
+    border: 2px solid $base2;
+    padding: 4px;
+    position: relative;
+  }
+}
+
+.availableRes {
+  > div:first-of-type {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    span {
+      @include flex;
+
+      h2:first-of-type {
+        color: $base5;
+      }
+
+      h2:nth-of-type(2) {
+        color: orange;
+      }
+    }
+  }
+
+  p {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 11px;
+    width: 70%;
+  }
+
+  button {
+    @include btn(13px);
+    position: absolute;
+    right: 4px;
+    bottom: 4px;
+  }
+}

@@ -1,0 +1,27 @@
+@import "src/styles/colours";
+@import "src/styles/mixins";
+@import "src/styles/vars";
+
+.footer {
+  height: 24px;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border-top: 8px solid $base2;
+  background: $base;
+  color: white;
+  font-family: "Bebas Neue", sans-serif;
+  display: flex;
+  align-items: center;
+  padding-left: 4px;
+
+  a {
+    color: $base4;
+    text-decoration: none;
+
+    &:hover {
+      color: white;
+    }
+  }
+}

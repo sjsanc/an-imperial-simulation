@@ -1,0 +1,122 @@
+@import "src/styles/colours";
+@import "src/styles/mixins";
+@import "src/styles/vars";
+
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.structure {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border: 2px solid $base2;
+  width: 180px;
+  margin-right: 10px;
+  padding: 4px;
+  min-height: 250px;
+
+  h1 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  > div p {
+    text-align: left;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 0.7rem;
+  }
+  > p:first-of-type {
+    text-align: left;
+    font-family: "Ubuntu", sans-serif;
+    font-size: 0.7rem;
+  }
+
+  h2 {
+    font-family: "Bebas Neue", sans-serif;
+    font-size: 1rem;
+  }
+
+  img {
+    height: 21px;
+    width: 21px;
+  }
+}
+
+.costblock {
+  width: 100%;
+  margin: 0 auto;
+  //   padding: 5px;
+  background: $base2;
+  border: 2px solid $base2;
+  border-radius: 5px;
+
+  p {
+    font-family: "Ubuntu", sans-serif;
+    font-size: 0.7rem;
+    width: 50%;
+  }
+
+  div {
+    display: flex;
+    height: 15px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+
+    > p:first-of-type {
+      text-align: right;
+      padding-right: 7px;
+    }
+    > p:nth-of-type(2) {
+      text-align: left;
+      padding-left: 7px;
+      font-size: 0.8rem;
+      font-weight: normal;
+      font-family: "Bebas Neue", sans-serif;
+    }
+  }
+
+  h2 {
+    text-align: center;
+    padding: 5px 0;
+  }
+  h2:nth-of-type(2) {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 10px;
+  }
+}
+
+.constructBtnDisabled {
+  color: $base3;
+}
+.constructBtnEnabled {
+  width: 50px;
+  padding-top: 3px !important;
+  height: 26px;
+  color: white;
+  border-radius: 4px;
+  border: 2px solid white;
+  margin-bottom: 5px;
+  &:hover {
+    background: white;
+    color: $base1;
+    cursor: pointer;
+  }
+}
+
+.greened {
+  color: rgb(66, 237, 66);
+  text-shadow: 0 0 6px rgba(185, 255, 185, 0.576);
+}
+
+.greyed {
+  color: $base3;
+}
+
+.active {
+  border-color: $base5;
+}

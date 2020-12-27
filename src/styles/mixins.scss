@@ -1,0 +1,80 @@
+@mixin flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin scrollbar {
+  overflow: scroll;
+  overflow-x: hidden;
+  background: $base;
+
+  &::-webkit-scrollbar {
+    background: $base3;
+    width: 9px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: $base3;
+    border-radius: 1px;
+  }
+  &::-webkit-scrollbar-corner {
+    background: $base1;
+  }
+}
+
+@mixin btn($size) {
+  font-family: "Bebas Neue", sans-serif;
+  color: white;
+  font-size: $size !important;
+  border: 2px solid white;
+  border-radius: 4px;
+  padding: 2px 8px;
+  background: none;
+  transition: all 0.2s;
+
+  &:hover {
+    background: white;
+    color: $base;
+    cursor: pointer;
+  }
+}
+
+@mixin btn-disabled($size) {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: $size !important;
+  border: 2px solid $base2;
+  border-radius: 4px;
+  padding: 2px 8px;
+  background: $base2;
+  color: $base4;
+}
+
+// FILTER MIXINS
+@mixin filter-white {
+  // #FFF
+  filter: invert(100%) sepia(77%) saturate(0%) hue-rotate(138deg)
+    brightness(102%) contrast(106%);
+}
+
+@mixin filter-red {
+  // #FF2F1F
+  filter: invert(46%) sepia(95%) saturate(5709%) hue-rotate(347deg)
+    brightness(97%) contrast(106%);
+}
+
+@mixin filter-orange {
+  // #F26522
+  filter: invert(43%) sepia(91%) saturate(628%) hue-rotate(339deg)
+    brightness(94%) contrast(102%);
+}
+
+@mixin filter-base2 {
+  // #1a1d1d
+  filter: invert(90%) sepia(2%) saturate(500%) hue-rotate(131deg)
+    brightness(26%) contrast(81%);
+}
+
+@mixin filter-base9 {
+  filter: invert(68%) sepia(10%) saturate(213%) hue-rotate(142deg)
+    brightness(91%) contrast(88%);
+}
