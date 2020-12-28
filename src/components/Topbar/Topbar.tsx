@@ -1,30 +1,21 @@
 import React from "react";
-import style from "../styles/Topbar.module.scss";
+import style from "./Topbar.module.scss";
 
 import { useDispatch, useSelector, RootStateOrAny } from "react-redux";
-import {
-  toggleStart,
-  setRate,
-  addYear,
-  addMonth,
-} from "../slices/mainloopSlice";
-import { getSeason, parseTime } from "../tools/parseTime";
+import { toggleStart, setRate } from "../../slices/mainloopSlice";
+import { getSeason, parseTime } from "../../tools/parseTime";
 
 // ICON IMPORTS
-import PersonIcon from "../assets/icons/delapouite/roman-toga.png";
-import EmployedIcon from "../assets/icons/delapouite/farmer.png";
-import EventsDisplay from "./EventsDisplay/EventsDisplay";
-import { K } from "../constants";
+import EventsDisplay from "../EventsDisplay/EventsDisplay";
+import { K } from "../../constants";
+import PopBox from "./PopBox";
 
 export default function Topbar(props: { time: number }) {
   const dispatch = useDispatch();
-
   const time = props.time;
-
   const { runStatus, rate } = useSelector(
     (state: RootStateOrAny) => state
   ).mainloopSlice;
-
   const { citizens, employed } = useSelector(
     (state: RootStateOrAny) => state
   ).populationSlice;
@@ -84,50 +75,8 @@ export default function Topbar(props: { time: number }) {
       </div>
       <div className={style.seasonBox}>
         <h2>{getSeason(time, parseTime(time).years)}</h2>
-        <h2>{getSeason(time, parseTime(time).years)}</h2>
-        {/* <h2
-          style={{
-            clipPath: `inset(0px ${225 % (time * (95 / 225))}px 0px 0px)`,
-          }}
-          className={
-            runStatus
-              ? style.seasonBoxCover
-              : [style.seasonBoxCover, style.pausedAnimation].join(" ")
-          }>
-          {getSeason(time)}
-        </h2>
-        <h2>{getSeason(time)}</h2> */}
       </div>
-      <div className={style.popBox}>
-        <div>
-          <img
-            src={`${process.env.PUBLIC_URL}/usedIcons/ui/people.png`}
-            alt="population"
-          />
-          <h2>{citizens.length}</h2>
-        </div>
-        <div>
-          <img
-            src={`${process.env.PUBLIC_URL}/usedIcons/ui/employed.png`}
-            alt="employed"
-          />
-          <h2>{employed}</h2>
-        </div>
-        <div>
-          <img
-            src={`${process.env.PUBLIC_URL}/usedIcons/ui/military.png`}
-            alt="military"
-          />
-          <h2>0</h2>
-        </div>
-        <div>
-          <img
-            src={`${process.env.PUBLIC_URL}/usedIcons/ui/hero.png`}
-            alt="heroes"
-          />
-          <h2>0</h2>
-        </div>
-      </div>
+      <PopBox citizens={citizens} employed={employed} />
       <EventsDisplay />
     </div>
   );

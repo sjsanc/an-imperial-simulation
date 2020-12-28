@@ -11,6 +11,7 @@ export type Msg = {
   id: number;
   type: string;
   typeFK: string | number;
+  ctx?: any;
 };
 
 const msgAdaptor = createEntityAdapter<Msg>({

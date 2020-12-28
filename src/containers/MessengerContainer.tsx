@@ -16,6 +16,12 @@ const hydrateMessages = (messages: Msg[], msgData: any) => {
     switch (msg.type) {
       case "flavour":
         out.push(Object.assign({ body: msgData["flavour"][msg.typeFK] }, msg));
+        break;
+      case "deathReport":
+        out.push(
+          Object.assign({ body: `${msg.ctx} people have died this year.` })
+        );
+        break;
     }
   });
   return out;

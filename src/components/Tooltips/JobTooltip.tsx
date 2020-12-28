@@ -6,9 +6,7 @@ export default function JobTooltip(props: { visible: boolean; job: JobType }) {
   return (
     <div
       className={
-        props.visible
-          ? style.jobTooltip
-          : [style.jobTooltip, style.hidden].join(" ")
+        props.visible ? style.tooltip : [style.tooltip, style.hidden].join(" ")
       }>
       <div>
         <h1>consumes</h1>

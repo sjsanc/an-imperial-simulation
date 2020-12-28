@@ -1,6 +1,6 @@
-@import "colours";
-@import "mixins";
-@import "vars";
+@import "src/styles/colours";
+@import "src/styles/mixins";
+@import "src/styles/vars";
 
 .wrapper {
   background: $base;
@@ -76,6 +76,8 @@
 
 .popBox {
   color: white;
+  position: relative;
+
   img {
     height: 25px;
     margin-left: 0;

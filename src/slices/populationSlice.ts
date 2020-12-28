@@ -12,8 +12,8 @@ const populationSlice = createSlice({
   name: "population",
   initialState,
   reducers: {
-    birth: (state, action: PayloadAction<{ age: number }>) => {
-      state.citizens.push(action.payload.age);
+    birth: (state, action: PayloadAction<number>) => {
+      state.citizens.push(action.payload);
     },
     birthCohort: (state, action: PayloadAction<number[]>) => {
       state.citizens = state.citizens.concat(action.payload);

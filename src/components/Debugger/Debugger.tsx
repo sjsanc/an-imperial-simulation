@@ -7,6 +7,7 @@ import { ResSelector, updateResearch } from "../../slices/researchSlice";
 import store from "../../store/store";
 import { find } from "../../tools/utils";
 import { resData } from "../../data/resData";
+import { birth } from "../../slices/populationSlice";
 
 export default function Debugger(props: { time: number; visible: boolean }) {
   const dispatch = useDispatch();
@@ -22,38 +23,14 @@ export default function Debugger(props: { time: number; visible: boolean }) {
       style={props.visible ? { display: "inline" } : { display: "none" }}>
       <h1>Debugger -- time: {time}</h1>
       <button
-        onClick={() =>
-          dispatch(
-            alterEmpireStat({
-              type: "fertility",
-              direction: "inc",
-              amount: 3,
-            })
-          )
-        }>
-        VITALITY
+        onClick={() => handleAlterResource(researchRes, dispatch, "inc", 1000)}>
+        Give 1K Research
       </button>
       <button
         onClick={() => {
-          let res = ResSelector.selectAll(store.getState());
-          console.log(res);
+          dispatch(birth(55));
         }}>
-        GetEnt
-      </button>
-      <button
-        onClick={() =>
-          dispatch(
-            updateResearch({
-              id: "science",
-              changes: { complete: true },
-            })
-          )
-        }>
-        GetRes
-      </button>
-      <button
-        onClick={() => handleAlterResource(researchRes, dispatch, "inc", 1000)}>
-        1000Research
+        Add old person (55)
       </button>
     </div>
   );

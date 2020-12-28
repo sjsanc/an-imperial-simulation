@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./App.scss";
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { addMonth, step } from "./slices/mainloopSlice";
-import Topbar from "./components/Topbar";
+import Topbar from "./components/Topbar/Topbar";
 import PopulationContainer from "./containers/PopulationContainer";
 import ResourceContainer, {
   handleAlterResource,

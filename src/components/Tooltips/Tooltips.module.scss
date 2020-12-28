@@ -2,21 +2,20 @@
 @import "src/styles/mixins";
 @import "src/styles/vars";
 
-@mixin basicTooltip {
+@mixin basicTooltip($width, $top) {
   position: absolute;
-}
-
-.jobTooltip {
-  position: absolute;
-  bottom: -112px;
+  width: $width;
+  top: $top;
   left: 0;
-  width: 100%;
-  background: $base2;
+  right: 0;
+  margin-left: auto;
+  margin-right: auto;
+  background: $base2 !important;
   border: 2px solid $base3 !important;
   color: white;
   transition: 0.1s ease-in-out;
-  padding: 10px;
   z-index: 2;
+  padding: 8px 2px 4px 2px;
   pointer-events: none;
 
   &::before {
@@ -50,16 +49,20 @@
 
   p {
     font-family: "Ubuntu", sans-serif;
-    font-size: 0.8rem;
+    font-size: 0.7rem;
     margin-right: 4px;
     margin-top: 5px;
   }
 
   img {
-    height: 14px;
-    width: 14px;
+    height: 12px;
+    width: 12px;
     margin-right: 2px;
   }
+}
+
+.tooltip {
+  @include basicTooltip(70%, 73px);
 
   > div {
     display: flex;
@@ -85,6 +88,36 @@
   color: white;
   border: 2px solid white;
   padding: 4px;
+}
+
+.populationTooltip {
+  @include basicTooltip(70%, 50px);
+  display: flex;
+  flex-direction: column;
+  height: 185px !important;
+  padding: 4px;
+
+  div {
+    background: none;
+    display: flex;
+    flex-direction: row;
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  p {
+    font-size: 0.6rem;
+    padding: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+  }
+
+  img {
+    height: 14px;
+    width: 14px;
+    background: $base2;
+  }
 }
 
 .hidden {
