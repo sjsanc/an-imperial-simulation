@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { JobType } from "../../types";
+import JobTooltip from "../Tooltips/JobTooltip";
 import style from "./JobPanel.module.scss";
 
 export default function Job(props: {
@@ -8,11 +9,18 @@ export default function Job(props: {
   dispatchHandlers: any;
   population: { citizens: number[]; employed: number };
 }) {
+  const [tooltip, showTooltip] = useState<boolean>(false);
   const dispatch = useDispatch();
   const job = props.job;
   const pop = props.population;
   return (
     <div
+      onMouseLeave={() => {
+        showTooltip(false);
+      }}
+      onMouseEnter={() => {
+        showTooltip(true);
+      }}
       className={
         job.workers > 0 ? [style.job, style.activeJob].join(" ") : style.job
       }>
@@ -52,6 +60,7 @@ export default function Job(props: {
         <h1>{job.name}</h1>
         <p>{job.desc}</p>
       </div>
+      <JobTooltip visible={tooltip} job={job} />
     </div>
   );
 }

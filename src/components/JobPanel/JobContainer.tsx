@@ -1,13 +1,8 @@
 import React, { useEffect } from "react";
 import style from "./JobPanel.module.scss";
-
 import { costCheck } from "../../tools/costCheck";
-
-// REDUX IMPORTS
 import { RootStateOrAny, useDispatch, useSelector } from "react-redux";
 import { customDispatch } from "../../types";
-
-// JOB IMPORTS
 import JobPanel from "./JobPanel";
 import { JobType } from "../../types";
 import {
@@ -15,22 +10,14 @@ import {
   assignWorker,
   setInsufficient,
 } from "../../slices/jobsSlice";
-
-// RES IMPORTS
-import {
-  handleAlterResource,
-  handleBulkAlterResource,
-} from "../../containers/ResourceContainer";
+import { handleAlterResource } from "../../containers/ResourceContainer";
 import { ResType } from "../../types";
-
-// POP IMPORTS
 import { changeEmployment } from "../../slices/populationSlice";
 
 const find = (thing: string, list: any[]) => {
   return list.find((li) => thing === li.name);
 };
 
-// HANDLER FUNCTIONS
 export const handlePerformJob = (
   job: JobType,
   dispatch: customDispatch,

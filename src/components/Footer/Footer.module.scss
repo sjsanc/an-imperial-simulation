@@ -24,4 +24,14 @@
       color: white;
     }
   }
+
+  button {
+    position: absolute;
+    right: 120px;
+    background: $base2;
+    color: white;
+    border: none;
+    padding: 0 3px 0 4px;
+    cursor: pointer;
+  }
 }

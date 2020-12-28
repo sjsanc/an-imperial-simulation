@@ -3,6 +3,7 @@ import store from "../store/store";
 
 export type Research = {
   name: string;
+  desc: string;
   complete: boolean;
   prereqs: string[];
   cost: number;

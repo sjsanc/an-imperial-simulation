@@ -66,6 +66,9 @@
 }
 
 .availableRes {
+  &:hover {
+    background: $base2;
+  }
   > div:first-of-type {
     display: flex;
     align-items: center;

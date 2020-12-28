@@ -27,8 +27,6 @@ export default function JobPanel(props: {
   ).structureSlice;
 
   const research = ResSelector.selectAll(store.getState());
-
-  const dispatch = useDispatch();
   const jobs: JobType[] = props.jobs;
 
   return (

@@ -11,6 +11,7 @@ type initialStateType = {
   resources: ResType[];
   pinlist: string[];
 };
+
 const initialState: initialStateType = {
   resources: resData,
   pinlist: [],

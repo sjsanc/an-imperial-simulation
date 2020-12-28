@@ -16,11 +16,12 @@ const tabs = [
   "etc",
 ];
 
-export default function CentrePanel(props: { time: number }) {
+export default function CentrePanel(props: { time: number; paused: boolean }) {
   const [activePanel, setActivePanel] = useState<string>("jobs");
   const time = props.time;
   return (
     <div className={style.wrapper}>
+      <div className={props.paused ? undefined : style.overlay}> </div>
       <div className={style.tabbar}>
         {tabs.map((tab) => (
           <h1

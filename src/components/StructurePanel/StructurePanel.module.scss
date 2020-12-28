@@ -4,6 +4,8 @@
 
 .wrapper {
   display: flex;
+  align-items: center;
+  justify-content: center;
   flex-wrap: wrap;
 }
 
@@ -34,9 +36,13 @@
     font-size: 0.7rem;
   }
 
-  h2 {
+  h2,
+  h3 {
     font-family: "Bebas Neue", sans-serif;
     font-size: 1rem;
+  }
+  h3 {
+    color: $base5;
   }
 
   img {

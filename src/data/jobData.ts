@@ -15,12 +15,20 @@ const rawData: JobPreType[] = [
     desc: "Scour the landscape for useful stuff.",
     cost: [],
     product: [
-      { name: "berries", amount: 5 },
-      { name: "wood", amount: 3 },
-      { name: "stone", amount: 3 },
+      { name: "berries", amount: 10 },
+      { name: "stone", amount: 2 },
     ],
     parentStructure: "basic",
     duration: 1,
+    research: [],
+  },
+  {
+    name: "chop wood",
+    desc: "Fell some mighty trees for their lumber",
+    cost: [],
+    product: [{ name: "wood", amount: 3 }],
+    parentStructure: "basic",
+    duration: 3,
     research: [],
   },
   {
@@ -58,6 +66,15 @@ const rawData: JobPreType[] = [
     research: [],
   },
   {
+    name: "ponder",
+    desc: "Ponder the finer things in life",
+    cost: [],
+    product: [{ name: "research", amount: 5 }],
+    parentStructure: "sundial",
+    duration: 4,
+    research: [],
+  },
+  {
     name: "blacksmith",
     desc: "make some cool stuff from iron",
     cost: [
@@ -75,8 +92,8 @@ const rawData: JobPreType[] = [
     cost: [],
     product: [
       {
-        name: "grain",
-        amount: 5,
+        name: "wheat",
+        amount: 15,
       },
     ],
     parentStructure: "farmhouse",

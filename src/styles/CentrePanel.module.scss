@@ -16,10 +16,11 @@
 
 .tabbar {
   width: 100%;
+  margin-bottom: 10px;
   @include flex;
 
   h1 {
-    font-size: 1rem;
+    font-size: 1.2rem;
     font-family: "Bebas Neue", sans-serif;
     margin: 0 10px;
     color: $base5;
@@ -32,4 +33,16 @@
 }
 .active {
   color: white !important;
+}
+
+.overlay {
+  background: black;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.6;
+  transition: 0.5s ease-in-out;
+  pointer-events: none;
 }

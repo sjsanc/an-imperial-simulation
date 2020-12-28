@@ -20,10 +20,16 @@ export default function PopulationContainer(props: { time: number }) {
     if (time > 0) {
       if (parseTime(time).days % K.YEAR === 0) {
         dispatch(ageUp());
-        dispatch(expireNaturally(65 + empire.vitality));
+        dispatch(
+          expireNaturally(5 + empire.vitality + Math.floor(Math.random() * 5))
+        );
       }
       if ((parseTime(time).days % K.MONTH) * 6 === 0) {
-        dispatch(birthCohort(new Array(empire.fertility).fill(0)));
+        dispatch(
+          birthCohort(
+            new Array(Math.floor(Math.random() * empire.fertility)).fill(0)
+          )
+        );
       }
     }
   }, [time, dispatch, empire]);

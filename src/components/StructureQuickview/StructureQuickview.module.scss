@@ -16,7 +16,7 @@
 
 .subWrapper {
   display: flex;
-  justify-content: center;
+  // justify-content: center;
   direction: ltr;
 }
 
@@ -27,11 +27,6 @@
   border: 4px solid $base2;
   margin: 5px;
   position: relative;
-  cursor: pointer;
-
-  &:hover {
-    border: 4px solid $base4;
-  }
 
   img {
     height: 37px;

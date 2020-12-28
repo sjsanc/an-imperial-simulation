@@ -23,11 +23,6 @@ export const handleAlterResource = (
     dispatch(decreaseRes({ resname: res.name, amount: amount }));
 };
 
-type BulkAlterType = {
-  res: ResType;
-  amount: number;
-};
-
 export const handleCost = (
   costs: QuantType[],
   reslist: ResType[],
@@ -37,18 +32,6 @@ export const handleCost = (
     let res = find(cost.name, reslist);
     handleAlterResource(res, dispatch, "desc", cost.amount);
   });
-};
-
-export const handleBulkAlterResource = (
-  resList: BulkAlterType[],
-  dispatch: customDispatch,
-  type: "inc" | "desc"
-) => {
-  if (type === "inc") {
-    resList.forEach((res) => {
-      dispatch(increaseRes({ resname: res.res.name, amount: res.amount }));
-    });
-  }
 };
 
 export default function ResourceContainer() {

@@ -3,7 +3,7 @@ import style from "./Footer.module.scss";
 import FPSMeter from "../../tools/FPSmeter";
 import { K } from "../../constants";
 
-export default function Footer() {
+export default function Footer(props: { showDebugger: any }) {
   return (
     <footer className={style.footer}>
       <p>AN IMPERIAL SIMULATION</p>
@@ -11,6 +11,8 @@ export default function Footer() {
       <p>
         VERSION: {K.VERSION}-{K.VERSION_TITLE}
       </p>
+
+      <button onClick={() => props.showDebugger()}>show debugger</button>
       <div className="fpsMeter">
         <FPSMeter />
       </div>

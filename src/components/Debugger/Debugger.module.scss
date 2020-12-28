@@ -1,0 +1,33 @@
+@import "src/styles/colours";
+@import "src/styles/mixins";
+@import "src/styles/vars";
+
+.wrapper {
+  min-width: 400px;
+  background: $base;
+  border-radius: 5px;
+  padding: 5px;
+  position: absolute;
+  bottom: 40px;
+  margin-left: 35%;
+  color: white;
+
+  h1 {
+    font-family: monospace;
+    font-size: 0.8rem;
+    margin-bottom: 4px;
+  }
+
+  button {
+    border: 0;
+    background: $base3;
+    color: white;
+    padding: 4px;
+    margin-right: 4px;
+
+    &:hover {
+      background: $base4;
+      cursor: pointer;
+    }
+  }
+}

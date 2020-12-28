@@ -1,3 +1,5 @@
+import { K } from "../constants";
+
 export const parseTime = (time: number) => {
   let days = time,
     months = Math.floor(time / 25),
@@ -9,15 +11,16 @@ export const parseTime = (time: number) => {
   };
 };
 
-export const getSeason = (time: number) => {
+export const getSeason = (time: number, year: number) => {
+  let yr = year + 1;
   switch (true) {
-    case time <= 75:
+    case time <= K.MONTH * 3:
       return "SPRING";
-    case time > 75 && time <= 150:
+    case time > K.MONTH * 3 * yr && time <= K.MONTH * 6:
       return "SUMMER";
-    case time > 150 && time <= 225:
+    case time > K.MONTH * 6 * yr && time <= K.MONTH * 9:
       return "AUTUMN";
-    case time > 255:
+    case time > K.MONTH * 12:
       return "WINTER";
     default:
       return "HELL";

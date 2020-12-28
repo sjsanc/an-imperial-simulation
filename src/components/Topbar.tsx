@@ -83,8 +83,12 @@ export default function Topbar(props: { time: number }) {
         </h2>
       </div>
       <div className={style.seasonBox}>
-        <h2
-          style={{ clipPath: `inset(0px ${time % 75}px 0px 0px)` }}
+        <h2>{getSeason(time, parseTime(time).years)}</h2>
+        <h2>{getSeason(time, parseTime(time).years)}</h2>
+        {/* <h2
+          style={{
+            clipPath: `inset(0px ${225 % (time * (95 / 225))}px 0px 0px)`,
+          }}
           className={
             runStatus
               ? style.seasonBoxCover
@@ -92,7 +96,7 @@ export default function Topbar(props: { time: number }) {
           }>
           {getSeason(time)}
         </h2>
-        <h2>{getSeason(time)}</h2>
+        <h2>{getSeason(time)}</h2> */}
       </div>
       <div className={style.popBox}>
         <div>

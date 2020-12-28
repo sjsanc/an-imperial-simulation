@@ -17,7 +17,6 @@ const handleCompleteResearch = (
   dispatch: customDispatch,
   resResource: ResType
 ) => {
-  console.log(research.name);
   if (resResource.amount >= research.cost) {
     handleAlterResource(resResource, dispatch, "desc", research.cost);
     dispatch(

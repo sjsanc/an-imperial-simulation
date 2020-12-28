@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import style from "./StructureQuickview.module.scss";
 import { StructureType } from "../../types";
 import { useDispatch } from "react-redux";
+import LabelTooltip from "../Tooltips/LabelTooltip";
 
 export default function StructureQuickviewElement(props: {
   ctx: StructureType;

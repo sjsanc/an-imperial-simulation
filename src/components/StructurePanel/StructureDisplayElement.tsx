@@ -33,6 +33,7 @@ export default function StructureDisplayElement(props: {
             {ctx.amount}
           </span>
         </h1>
+        <h3>{ctx.type}</h3>
         <p>{ctx.desc}</p>
       </div>
       <div className={style.costblock}>

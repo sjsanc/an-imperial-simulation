@@ -18,7 +18,7 @@ export default function StructurePanel() {
   return (
     <div className={style.wrapper}>
       {structures.map((str: StructureType) => {
-        if (str.name !== "basic") {
+        if (str.name !== "basic" && str.available === true) {
           return (
             <StructureDisplayElement
               key={str.name}
