@@ -1,20 +1,31 @@
-import { Parcel } from "../types/types";
+import { DataClasses } from "./../types/types.d";
+import { Item, Parcel } from "../types/types";
+import { GameEngine } from "../store/initialState";
+
+export interface JobProps {
+  name: string;
+  initials?: string;
+  description: string;
+  costs: Parcel[];
+  product: Parcel[];
+}
 
 export class Job {
   name: string = "";
+  initials = "";
   description: string = "";
-  baseProduct: Parcel[] = [];
-  baseCost: Parcel[] = [];
+  costs: Parcel[] = [];
+  product: Parcel[] = [];
+  insufficient = false;
+  index: number = 0;
 
-  assignedWorkerCount = 0;
-  _isAssignable? = false;
+  workers = 0;
 
-  constructor(init: Partial<Job>) {
-    Object.assign(this, init);
-  }
+  // engine: GameEngine;
+  type = "jobs" as keyof DataClasses;
 
-  isActive() {
-    if (this.assignedWorkerCount > 0) return true;
-    else return false;
+  constructor(props: JobProps) {
+    Object.assign(this, props);
+    if (!props.initials) this.initials = props.name[0];
   }
 }

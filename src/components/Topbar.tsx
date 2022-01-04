@@ -4,58 +4,94 @@ import { getDays, getYears } from "../helpers/formatTime";
 import { useStore } from "../store/store";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { FaPlay, FaPause } from "react-icons/fa";
-import useTimeActions from "../actions/useTimeActions";
+import { FaPlay, FaPause, FaFastForward } from "react-icons/fa";
+import { useGameEngine } from "../hooks/useGameEngine";
+import tw from "twin.macro";
+import { Job } from "../classes/Job";
 
-export default function Topbar() {
+export default function Topbar({ debug, setDebug }: { debug: boolean; setDebug: any }) {
   const { state } = useStore();
-  const { play, pause } = useTimeActions();
-  const currentYear = getYears(state.currentTick, state.gameConfig.yearLength);
-  const currentDay = getDays(state.currentTick, state.gameConfig.yearLength);
-
-  const setPlayPause = (e: React.MouseEvent) => {
-    state.gameLoopRunning ? pause() : play();
-  };
+  const actions = useGameEngine();
+  const currentYear = getYears(state.state.currentTick, state.config.yearLength);
+  const currentDay = getDays(state.state.currentTick, state.config.yearLength);
 
   return (
     <Wrapper>
-      <div>
+      <div className="title">
         <h1>AN IMPERIAL SIMULATION</h1>
-        <Button>About</Button>
-        <Button>Wiki</Button>
-        <Button>Credits</Button>
+        <button>About</button>
+        <button>Wiki</button>
+        <button>Credits</button>
+        <button onClick={() => setDebug(!debug)}>Debug</button>
       </div>
-      <div>
-        <PopIndicator>
-          <h3>
-            POP: {state.population.total}/{state.population.workers}
-          </h3>
-        </PopIndicator>
-        <TimeControls>
-          <div className="playPause" onClick={setPlayPause}>
-            {state.gameLoopRunning ? <FaPause /> : <FaPlay />}
+
+      <div className="float-right">
+        <div className="population">
+          <div>
+            <label>Total</label>
+            <h3>{state.data.census.length}</h3>
           </div>
-          <CircularProgressbar
-            className="progress"
-            maxValue={state.gameConfig.yearLength}
-            value={currentDay}
-            strokeWidth={10}
-            text={currentYear.toString()}
-            styles={{
-              path: {
-                stroke: "white",
-                strokeLinecap: "butt",
-              },
-              trail: {
-                stroke: "#1d1d1d",
-              },
-              text: {
-                fill: "white",
-                fontSize: "30px",
-              },
-            }}
-          />
-        </TimeControls>
+          <div>
+            <label>Workers</label>
+            <h3>{state.getCountByPropValue("census", "role", "worker")}</h3>
+          </div>
+          <div>
+            <label>Employed</label>
+            <h3>{state.getEmployedCount()}</h3>
+          </div>
+          <div>
+            <label>Soldiers</label>
+            <h3>0</h3>
+          </div>
+          <div>
+            <label>Heroes</label>
+            <h3>0</h3>
+          </div>
+        </div>
+
+        <div className="date-display">
+          <div>
+            <label>Day</label>
+            <h3>{currentDay}</h3>
+          </div>
+          <div>
+            <label>Month</label>
+            <h3>Septober</h3>
+          </div>
+          <div>
+            <label>Year</label>
+            <h3>{currentYear}</h3>
+          </div>
+          <div>
+            <CircularProgressbar
+              className="progress"
+              maxValue={state.config.yearLength}
+              value={currentDay}
+              strokeWidth={10}
+              styles={{
+                path: {
+                  stroke: "white",
+                  strokeLinecap: "butt",
+                },
+                trail: {
+                  stroke: "black",
+                },
+              }}
+            />
+          </div>
+        </div>
+
+        <div className="time-controls">
+          <div className={!state.state.isRunning ? "active" : ""} onClick={() => actions.pause()}>
+            <FaPause />
+          </div>
+          <div className={state.state.isRunning ? "active" : ""} onClick={() => actions.play()}>
+            <FaPlay />
+          </div>
+          {/* <div>
+            <FaFastForward />
+          </div> */}
+        </div>
       </div>
     </Wrapper>
   );
@@ -63,75 +99,75 @@ export default function Topbar() {
 
 const Wrapper = styled.div`
   background: ${({ theme: { colors } }) => colors.dark};
-  color: white;
-  padding: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
   height: 60px;
+  ${tw`flex items-center justify-between text-white`}
 
-  * {
-    margin-right: 7px;
+  label {
+    ${tw`text-gray-300 font-medium uppercase flex`}
+    font-size: 9px;
+  }
+
+  .title {
+    ${tw`p-2`}
+    h1 {
+      ${tw`mr-2`}
+    }
+    button {
+      background: ${({ theme: { colors } }) => colors.dark};
+      ${tw`border-none p-2 rounded font-medium text-white cursor-pointer`}
+      &:hover {
+        background: ${({ theme: { colors } }) => colors.grey};
+      }
+    }
+  }
+
+  .float-right {
+    ${tw`flex`}
+  }
+
+  .time-controls {
+    background: #303030;
+    ${tw`flex items-center rounded my-1 mr-2`}
+    div {
+      ${tw`rounded p-3 cursor-pointer mx-2`}
+    }
+    svg {
+      ${tw`text-gray-500`}
+    }
+    .active svg {
+      ${tw`text-white`}
+    }
+  }
+
+  .date-display {
+    ${tw`flex items-end my-1 mr-2 p-1`}
+    div {
+      ${tw`flex flex-col mx-3`}
+    }
+    h3 {
+      ${tw`m-0`}
+    }
+    svg {
+      margin-bottom: 2px;
+      max-height: 35px;
+    }
+  }
+
+  .population {
+    ${tw`flex items-end my-1 mr-2 p-1 rounded cursor-pointer`}
+    &:hover {
+      ${tw``}
+      background: #272727;
+    }
+    div {
+      ${tw`flex flex-col mx-3`}
+    }
+    h3 {
+      ${tw`m-0`}
+    }
   }
 
   div {
     display: flex;
   }
-`;
-
-const Button = styled.button`
-  color: white;
-  background: ${({ theme: { colors } }) => colors.dark};
-  border: none;
-  border-radius: 3px;
-  padding: 10px 16px;
-  font-weight: 500;
-  font-size: 15px;
-
-  &:hover {
-    background: ${({ theme: { colors } }) => colors.grey};
-    cursor: pointer;
-  }
-`;
-
-const TimeControls = styled.div`
-  margin: 0;
-  .progress {
-    width: unset;
-    height: 40px;
-  }
-
-  .playPause {
-    display: flex;
-    margin: 0 15px 0 0;
-    width: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-
-    svg {
-      display: block;
-      margin: 0 auto;
-    }
-
-    &:hover {
-      color: gray;
-      transition: 0.2s ease-in-out;
-    }
-  }
-  h2 {
-    margin-right: 15px;
-    display: flex;
-    align-items: center;
-  }
-  text {
-    font-family: "Bebas Neue", sans-serif;
-  }
-`;
-
-const PopIndicator = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
 `;

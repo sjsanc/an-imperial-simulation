@@ -1,24 +1,8 @@
 import React, { createContext, useContext } from "react";
 import { set, get } from "lodash/fp";
-import { g, GameEngine } from "./initialState";
-
-type DotPrefix<T extends string> = T extends "" ? "" : `.${T}`;
-
-type DotNestedKeys<T> = (
-  T extends object
-    ? { [K in Exclude<keyof T, symbol>]: `${K}${DotPrefix<DotNestedKeys<T[K]>>}` }[Exclude<
-        keyof T,
-        symbol
-      >]
-    : ""
-) extends infer D
-  ? Extract<D, string>
-  : never;
-
-export type DocumentUpdate<T> = Partial<{ [key in DotNestedKeys<T>]: any & T }> & Partial<T>;
-// const update = {} as DocumentUpdate<StoreInterface>;
-
-type StoreInterfaceKeys = DotNestedKeys<GameEngine> | (string & {});
+import { GameEngine, mainDataObject } from "./initialState";
+import { concat } from "lodash";
+import { StoreAction } from "../types/types";
 
 export enum ActionTypes {
   INCREASE_BY = "increase_by",
@@ -29,14 +13,7 @@ export enum ActionTypes {
   PUSH = "push",
 }
 
-interface StoreAction {
-  type: ActionTypes;
-  payload: {
-    target: StoreInterfaceKeys;
-    value: any;
-    message?: string;
-  };
-}
+export const g = new GameEngine(mainDataObject);
 
 export type AppState = typeof g;
 
@@ -61,9 +38,11 @@ const storeReducer = (state: AppState, action: StoreAction) => {
     case ActionTypes.SET:
       return (state = set(payload.target, payload.value, state));
     case ActionTypes.PUSH:
-      const target = get(payload.target, state);
-      target.push(payload.value);
-      return (state = set(payload.target, target, state));
+      return (state = set(
+        payload.target,
+        concat(get(payload.target, state), payload.value),
+        state
+      ));
     default:
       return state;
   }
@@ -78,6 +57,7 @@ const useReducerWithMiddleware = (
 
   const dispatchWithMiddleware = (action: StoreAction) => {
     middleware(action, action.payload.message);
+    state.dispatchCount++;
     dispatch(action);
   };
 
@@ -93,10 +73,3 @@ export const ContextProvider = (props: any) => {
 export const useStore = () => {
   return useContext(Store);
 };
-
-// NOTES
-// Events on the UI will trigger a HANDLER
-// Handlers will call ACTIONS
-// Actions will mutate the store in same way, such as "build structure"
-// But the Action will do this via range of CRUD primitives
-// So the store only interacts with these primitives

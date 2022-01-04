@@ -1,16 +1,20 @@
-import { Job } from "../classes/Job";
+import { JobProps } from "../classes/Job";
 
-const jobs: Job[] = [
-  new Job({
-    name: "sleep",
-    baseCost: [],
-    baseProduct: [["wood", 10]],
-  }),
-  new Job({
-    name: "produce soldiers",
-    baseCost: [["wood", 10]],
-    baseProduct: [["wood", 10]],
-  }),
+const jobs: JobProps[] = [
+  {
+    name: "grow wheat",
+    description:
+      "Cereals are the cornerstone of civilisation and will be needed in abundance as your Empire grows",
+    initials: "GW",
+    costs: [["water", 5]],
+    product: [["food", 10]],
+  },
+  {
+    name: "Grow sugarbeets",
+    description: "Beets are the fat an sassy cousin of turnips.",
+    costs: [["water", 5]],
+    product: [["food", 7]],
+  },
 ];
 
 export default jobs;

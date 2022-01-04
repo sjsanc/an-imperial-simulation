@@ -1,40 +1,86 @@
-import { Parcel } from "../types/types";
+import {
+  Buildable,
+  DataClasses,
+  EffectReference,
+  Parcel,
+  PreReqs,
+  StructureTypes,
+} from "../types/types";
 import { Job } from "./Job";
 import * as data from "../data";
-import { Module } from "./Module";
+import { Upgrade } from "./Upgrade";
+import { GameEngine } from "../store/initialState";
 
-interface StructureProps {
+export interface StructureProps {
   name: string;
-  description: string;
-  jobNames: string[];
-  //   moduleNames: string[];
+  structureType: StructureTypes;
+
+  description?: string;
+  jobs?: string[];
+  upgrades?: string[];
+  buildCost?: Parcel[];
+  effects?: EffectReference[];
+  prereqs?: PreReqs;
+  value?: number;
+  volume?: number;
+  initials?: string;
 }
 
-export class Structure {
-  name: string;
-  description: string;
+export class Structure implements Buildable {
+  name = "";
+  initials = "";
+  description: string = "placeholder description";
+  type = "structures" as keyof DataClasses;
+  index: number = 0;
 
-  baseBuildCost: Parcel[] = [];
-  jobs: Job[] = [];
-  modules: Module[] = [];
+  value: number = 0; // for calc empire value
+  volume: number = 0; // how much space it takes up
 
-  _reportStatus: any = null;
-  _builtCount: number = 0;
+  buildCost: Parcel[] = [];
+
+  jobs: string[] = [];
+  upgrades: string[] = [];
+  effects: EffectReference[] = [];
+
+  structureType = ""; // subdivision i.e. "housing"
+
+  // Allows for the structure to be built, even if prereqs are no longer met
+  // Useful for debugging, but also allow for space clearence in late game
+  isBuildable: false;
+
+  isFrozen: false; // whether the jobs are running
+  builtCount: number = 0;
+
+  prereqs: PreReqs = {
+    structures: [],
+    achievements: [],
+    research: [],
+  };
+
+  productionReport: any = {
+    consumption: [],
+    production: [],
+  };
 
   constructor(props: StructureProps) {
-    this.name = props.name;
-    this.description = props.description;
-    // this.jobs = this.buildRef(props.jobNames, "jobs");
+    Object.assign(this, props);
+    if (!props.initials) this.initials = props.name[0];
   }
 
-  getTotalWorkers() {
-    // loop through workers on all jobs
-    return null;
+  isActive() {
+    // Determines whether the structure CAN be built
+    return true;
   }
 
-  //   buildRefs(nameList: string[], type: keyof DataClasses) {
-  //     return data[type].filter((j) => nameList.includes(j.name));
-  //   }
+  hasJobs() {
+    if (this.jobs.length > 0) return true;
+    else return false;
+  }
+
+  isBuilt() {
+    if (this.builtCount > 0) return true;
+    else return false;
+  }
 }
 
 // Structure A has 2 active jobs

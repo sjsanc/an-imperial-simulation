@@ -4,7 +4,6 @@ const research: Research[] = [
   new Research({
     name: "woodblock",
     description: "A block of wood for chopping",
-    modifiers: [],
   }),
 ];
 

@@ -1,32 +1,41 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import useJobActions from "../actions/useJobActions";
-import useTimeActions from "../actions/useTimeActions";
+import tw from "twin.macro";
+import { useGameEngine } from "../hooks/useGameEngine";
 import { useStore } from "../store/store";
 import "../styles/global.css";
 import Debugger from "./Debugger";
+import EmpirePanel from "./EmpirePanel";
 import MessagePanel from "./MessagePanel";
+import Quickview from "./Quickview";
 import ResourcePanel from "./ResourcePanel";
-import StructuresPanel from "./StructuresPanel";
+import StructuresPanel from "./structure/StructuresPanel";
 import Topbar from "./Topbar";
 
-const panels = ["Structures", "Research"];
+const panels = ["Structures", "Census", "Empire", "Research", "Military", "Allegiances", "Magic"];
 
 function App() {
   const [activePanel, setActivePanel] = useState<string>(panels[0]);
+  const [debug, setDebug] = useState<boolean>(true);
   const { state } = useStore();
-  const { tick } = useTimeActions();
-  const { performActiveJobs } = useJobActions();
+  const actions = useGameEngine();
 
-  // useEffect(() => {
-  //   const loop = setInterval(() => {
-  //     if (state.gameLoopRunning) {
-  //       tick();
-  //       performActiveJobs();
-  //     }
-  //   }, state.gameSpeed);
-  //   return () => clearInterval(loop);
-  // }, [state.gameLoopRunning]);
+  useEffect(() => {
+    const loop = setInterval(() => {
+      if (state.state.isRunning) {
+        actions.tick();
+
+        actions.performJobs();
+
+        actions.feedPop();
+
+        if (state.state.currentTick % 60 === 0) {
+          actions.calcBirths();
+        }
+      }
+    }, state.config.gameSpeed);
+    return () => clearInterval(loop);
+  }, [actions]);
 
   const handleSetPanel = (e: React.MouseEvent) => {
     setActivePanel(e.currentTarget.id);
@@ -36,27 +45,32 @@ function App() {
     switch (activePanel) {
       case panels[0]:
         return <StructuresPanel />;
+      case panels[2]:
+        return <EmpirePanel />;
     }
   };
 
   return (
     <Wrapper className="App">
-      {/* <Topbar />
+      <Topbar debug={debug} setDebug={setDebug} />
       <Main>
         <ResourcePanel />
         <CentrePanel>
-          <div>
-            {panels.map((item, i) => (
-              <Button active={activePanel === item} key={i} id={item} onClick={handleSetPanel}>
-                {item}
-              </Button>
-            ))}
+          <div className="center-top">
+            <div>
+              {panels.map((item, i) => (
+                <Button active={activePanel === item} key={i} id={item} onClick={handleSetPanel}>
+                  {item}
+                </Button>
+              ))}
+            </div>
+            <Quickview />
           </div>
-          <div>{renderPanel(activePanel)}</div>
+          <div className="overflow-panel">{renderPanel(activePanel)}</div>
         </CentrePanel>
         <MessagePanel />
       </Main>
-      <Debugger /> */}
+      <Debugger active={debug} setActive={setDebug} />
     </Wrapper>
   );
 }
@@ -67,10 +81,43 @@ const Wrapper = styled.div`
   height: 100vh;
   width: 100vw;
   background: #f0f0f0;
+  overflow: hidden;
+
+  .increase {
+    ${tw`text-green-500`}
+  }
+
+  .decrease {
+    ${tw`text-red-500`}
+  }
+
+  .overflow-panel {
+    height: 730px;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    ${tw`pr-1`}
+
+    &::-webkit-scrollbar {
+      ${tw`bg-gray-100`}
+      width: 8px;
+    }
+    &::-webkit-scrollbar-thumb {
+      ${tw`bg-gray-200`}
+      border-radius: 5px;
+    }
+    &::-webkit-scrollbar-corner {
+      /* background: $base1; */
+    }
+  }
+
+  .center-top {
+    /* ${tw`drop-shadow-md mb-2`} */
+  }
 `;
 
 const Main = styled.div`
   position: absolute;
+  overflow: hidden;
   top: 62px;
   bottom: 0;
   left: 0;
@@ -84,6 +131,7 @@ const CentrePanel = styled.div`
   top: 0px;
   right: 250px;
   bottom: 0;
+  /* ${tw`bg-gray-200`} */
 `;
 
 const Button = styled.button<{ active: boolean }>`

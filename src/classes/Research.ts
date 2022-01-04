@@ -1,11 +1,12 @@
-import { Parcel } from "../types/types";
-import { Modifier } from "./Modifier";
+import { EffectReference, Parcel } from "../types/types";
+import { Effect } from "./Effect";
 
 export class Research {
   name: string = "";
   description: string = "";
   researchCost: Parcel[] = [];
-  modifiers: Modifier[] = [];
+  effects: EffectReference[] = [];
+  index: number = 0;
 
   constructor(init: Partial<Research>) {
     Object.assign(this, init);

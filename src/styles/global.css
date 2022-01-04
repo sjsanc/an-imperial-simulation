@@ -1,4 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Roboto:wght@300;400;500&display=swap");
+
+@tailwind base;
+
+@tailwind components;
+
+@tailwind utilities;
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -12,9 +19,11 @@ h4,
 h5 {
   font-family: "Bebas Neue", sans-serif;
   margin-top: 3px;
+  letter-spacing: 0.8px;
 }
 
 p,
+div,
 li,
 button,
 label {

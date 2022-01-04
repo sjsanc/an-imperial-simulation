@@ -17,5 +17,9 @@
     "downlevelIteration": true,
     "jsx": "react-jsx"
   },
-  "include": ["src"]
+  "include": [
+    "/home/sjsanc/work/an-imperial-simulation/impsim-v5/src",
+    "tailwind.config.js",
+    "public/assets"
+  ]
 }
