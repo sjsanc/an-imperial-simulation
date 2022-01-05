@@ -83,7 +83,7 @@ const structures: StructureProps[] = [
     structureType: "industry",
     upgrades: ["crop rotation"],
     buildCost: [
-      ["wood", 25],
+      ["wood", 1000],
       ["stone", 15],
     ],
   },

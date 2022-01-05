@@ -92,7 +92,7 @@ const Wrapper = styled.div`
   }
 
   .overflow-panel {
-    height: 730px;
+    height: 100vh;
     overflow-y: scroll;
     overflow-x: hidden;
     ${tw`pr-1`}

@@ -81,11 +81,17 @@ export default function StructureDisplay({ str }: { str: Structure }) {
       )}
       {structureState === "buildable" && (
         <div className="initial-build">
-          <button onClick={() => actions.build(str, 1)}>BUILD</button>
+          {state.costCheck(str.buildCost) ? (
+            <button onClick={() => actions.build(str, 1)}>BUILD</button>
+          ) : (
+            <button disabled>INSUFFICIENT</button>
+          )}
           <div>
-            {str.buildCost.map((cost) => (
-              <ResCost cost={cost} />
-            ))}
+            {str.buildCost.length === 0 ? (
+              <div>Free!</div>
+            ) : (
+              str.buildCost.map((cost) => <ResCost cost={cost} />)
+            )}
           </div>
         </div>
       )}
@@ -107,6 +113,12 @@ const Wrapper = styled.div<{ strState }>`
 
     button {
       ${tw`bg-gray-500 border-0 px-3 py-2 rounded text-white font-medium cursor-pointer`}
+      &:hover {
+        ${tw`bg-gray-600`}
+      }
+      &:disabled {
+        pointer-events: none;
+      }
     }
 
     > div {
