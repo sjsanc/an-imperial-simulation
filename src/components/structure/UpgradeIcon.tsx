@@ -14,33 +14,23 @@ export default function UpgradeIcon({ upg }: { upg: Upgrade | "x" }) {
   if (upg === "x") return <EmptyIcon />;
   else
     return (
-      <Tippy placement="bottom" render={(attrs) => <div></div>}>
-        <Wrapper
-        //   insufficient={job.insufficient}
-        //   active={job.workers > 0}
-        //   onMouseDown={(e) => actions.setWorkers(job, 1, e)}>
-        >
-          {/* {job.workers} */}
+      <Tippy placement="bottom" render={(attrs) => <div>{upg.name}</div>}>
+        <Wrapper onClick={() => actions.build(upg, 1)} built={upg.builtCount > 0}>
+          {upg.initials}
         </Wrapper>
       </Tippy>
     );
 }
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ built }>`
   aspect-ratio: 1;
   ${tw`bg-gray-300 rounded flex items-center justify-center cursor-pointer`};
-  /* ${({ insufficient }) =>
-    insufficient &&
+  ${({ built }) =>
+    built &&
     css`
-      border: 1px solid #ff5314;
-      box-shadow: 0 0 3px #ff7542;
+      border: 2px solid gray;
+      /* box-shadow: 0 0 3px #ff7542; */ */
     `}
-  ${({ active }) =>
-    active &&
-    css`
-      border: 1px solid #dca800;
-      box-shadow: 0 0 3px #fff09d;
-    `} */
 `;
 
 const EmptyIcon = styled.div`

@@ -14,11 +14,13 @@ export default function StructureActions({ str }: { str: Structure }) {
   const { state } = useStore();
   const actions = useGameEngine();
 
+  console.log(state.getList(str, "upgrades"));
+
   return (
     <Wrapper>
       <LabelledGrid cols={3} label="Upgrades" className="muted">
-        {padArray([], 9).map((upg: any | "x", i) => (
-          <UpgradeIcon key={i} upg={upg}></UpgradeIcon>
+        {padArray(state.getList(str, "upgrades"), 9).map((upg: any | "x", i) => (
+          <UpgradeIcon key={i} upg={upg} />
         ))}
       </LabelledGrid>
       <LabelledGrid cols={3} label="Jobs" className="jobs muted">

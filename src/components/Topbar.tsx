@@ -1,28 +1,38 @@
 import React from "react";
 import styled from "styled-components";
-import { getDays, getYears } from "../helpers/formatTime";
+import { getDays, getYears, getMonth } from "../helpers/formatTime";
 import { useStore } from "../store/store";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { FaPlay, FaPause, FaFastForward } from "react-icons/fa";
+import { Menu } from "react-feather";
 import { useGameEngine } from "../hooks/useGameEngine";
 import tw from "twin.macro";
 import { Job } from "../classes/Job";
+import MediaQuery from "react-responsive";
 
 export default function Topbar({ debug, setDebug }: { debug: boolean; setDebug: any }) {
   const { state } = useStore();
   const actions = useGameEngine();
   const currentYear = getYears(state.state.currentTick, state.config.yearLength);
   const currentDay = getDays(state.state.currentTick, state.config.yearLength);
+  const currentMonth = getMonth(state.state.currentTick, state.config.yearLength);
 
   return (
     <Wrapper>
       <div className="title">
         <h1>AN IMPERIAL SIMULATION</h1>
-        <button>About</button>
-        <button>Wiki</button>
-        <button>Credits</button>
-        <button onClick={() => setDebug(!debug)}>Debug</button>
+        <MediaQuery minWidth={1200}>
+          <button>About</button>
+          <button>Wiki</button>
+          <button>Credits</button>
+          <button onClick={() => setDebug(!debug)}>Debug</button>
+        </MediaQuery>
+        <MediaQuery maxWidth={1200}>
+          <div className="menu-burger">
+            <Menu />
+          </div>
+        </MediaQuery>
       </div>
 
       <div className="float-right">
@@ -51,16 +61,16 @@ export default function Topbar({ debug, setDebug }: { debug: boolean; setDebug: 
 
         <div className="date-display">
           <div>
-            <label>Day</label>
-            <h3>{currentDay}</h3>
-          </div>
-          <div>
             <label>Month</label>
-            <h3>Septober</h3>
+            <h3>{getMonth(state.state.currentTick, state.config.yearLength)}</h3>
           </div>
           <div>
             <label>Year</label>
             <h3>{currentYear}</h3>
+          </div>
+          <div>
+            <label>Day</label>
+            <h3>{currentDay}</h3>
           </div>
           <div>
             <CircularProgressbar
@@ -119,6 +129,10 @@ const Wrapper = styled.div`
         background: ${({ theme: { colors } }) => colors.grey};
       }
     }
+  }
+
+  .menu-burger {
+    ${tw`flex items-center`}
   }
 
   .float-right {

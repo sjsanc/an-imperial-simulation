@@ -1,3 +1,4 @@
+import { getInitials } from "../helpers/displayHelpers";
 import {
   Buildable,
   DataClasses,
@@ -6,10 +7,6 @@ import {
   PreReqs,
   StructureTypes,
 } from "../types/types";
-import { Job } from "./Job";
-import * as data from "../data";
-import { Upgrade } from "./Upgrade";
-import { GameEngine } from "../store/initialState";
 
 export interface StructureProps {
   name: string;
@@ -64,7 +61,7 @@ export class Structure implements Buildable {
 
   constructor(props: StructureProps) {
     Object.assign(this, props);
-    if (!props.initials) this.initials = props.name[0];
+    if (!props.initials) this.initials = getInitials(props.name);
   }
 
   isActive() {

@@ -2,10 +2,13 @@ import { UpgradeProps } from "../classes/Upgrade";
 
 const upgrades: UpgradeProps[] = [
   {
-    name: "animal pens",
-    description: "Keeping your livestock close has never been easier!",
-    buildCost: [["wood", 2]],
-    // effects: [["raiseFoodProduction", 5, "%"]],
+    name: "ensorcelled beehives",
+    description: "Magical bees that require no tending!",
+    buildCost: [
+      ["wood", 25],
+      ["berries", 25],
+    ],
+    // effects: [["produceResource", 5, "honey"]],
   },
 ];
 

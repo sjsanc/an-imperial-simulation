@@ -3,8 +3,10 @@ IMPSIM TODO
 # PLAYABLE STATE
 
 -- Once these have been done, start filling in chains
--- Empire panel just needs to show the count for each stat thats it
---
+-- Do the resource tooltip
+-- Do the job tooltip
+-- Fix the debug bar
+-- Do the upgrades logic
 
 # Debugger
 

@@ -81,21 +81,41 @@ const structures: StructureProps[] = [
       "The agricultural building blocks of any budding empire. Produces a range of essential goods.",
     jobs: ["grow wheat", "farm beets"],
     structureType: "industry",
-    upgrades: ["crop rotation"],
+    upgrades: ["ensorcelled beehives"],
     buildCost: [
-      ["wood", 1000],
+      ["wood", 30],
       ["stone", 15],
     ],
   },
   {
     name: "quarry",
+    description:
+      "A place to pull raw minerals from the earth. An unpleasant place to be after it rains.",
     structureType: "industry",
+    value: 10,
+    volume: 50,
     jobs: ["extract stone", "quarry clay", "extract marble"],
+    prereqs: {
+      structures: ["farmstead"],
+      research: ["counterweights"],
+    },
+    buildCost: [
+      ["wood", 40],
+      ["stone", 20],
+      ["rivets", 20],
+      // ["machinery", 30],
+    ],
   },
   {
     name: "mine",
     structureType: "industry",
     jobs: ["mine coal", "mine iron ore", "mine gold", "mine silver", "mine gemstones"],
+    buildCost: [
+      ["wood", 40],
+      ["stone", 20],
+      ["rivets", 20],
+      // ["machinery", 30],
+    ],
   },
   {
     name: "smelter",

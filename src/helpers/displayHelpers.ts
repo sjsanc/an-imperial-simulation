@@ -6,3 +6,7 @@ export const padArray = (array: any, cols: number) => {
   else if (len === 0) return Array.from("x".repeat(cols));
   else return array;
 };
+
+export const getInitials = (word: string) => {
+  return word.split(/\s/).reduce((res, w) => (res += w.slice(0, 1)), "");
+};

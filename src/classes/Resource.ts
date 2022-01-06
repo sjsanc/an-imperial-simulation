@@ -7,6 +7,7 @@ export interface ResourceProps {
   amount?: number;
   iconPath?: string;
   resourceType: ResourceTypes;
+  value?: number;
 }
 export class Resource {
   name: string = "";
@@ -14,6 +15,7 @@ export class Resource {
   iconPath: string = "";
   index: number = 0;
 
+  value = 0;
   resourceType = "";
   category = "";
   type = "resources" as keyof DataClasses;
