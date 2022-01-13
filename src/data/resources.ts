@@ -10,6 +10,7 @@ const resources: ResourceProps[] = [
     amount: 100,
     resourceType: "raw_material",
     iconPath: "552",
+    value: 1,
   },
   {
     name: "stone",
@@ -17,6 +18,14 @@ const resources: ResourceProps[] = [
     iconPath: "549",
     resourceType: "raw_material",
     amount: 100,
+    value: 1,
+  },
+  {
+    name: "dressed stone",
+    description: "",
+    iconPath: "548",
+    resourceType: "raw_material",
+    value: 3,
   },
 
   // ================================================================================= //
@@ -27,6 +36,7 @@ const resources: ResourceProps[] = [
     description: "Golden sheafs of unprocessed, inedible wheat",
     resourceType: "raw_perishable",
     iconPath: "268",
+    value: 1,
   },
 
   // ================================================================================= //
@@ -37,20 +47,22 @@ const resources: ResourceProps[] = [
     description: "",
     iconPath: "418",
     resourceType: "goods_industrial",
-  },
-  {
-    name: "dressed stone",
-    description: "",
-    iconPath: "548",
-    resourceType: "goods_industrial",
+    value: 3,
   },
   {
     name: "rivets",
     description: "",
     iconPath: "821",
     resourceType: "goods_industrial",
+    value: 1,
   },
-
+  {
+    name: "machinery",
+    description: "",
+    iconPath: "",
+    resourceType: "goods_industrial",
+    value: 5,
+  },
   // ================================================================================= //
   // FOOD
   // ================================================================================= //

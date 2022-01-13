@@ -6,7 +6,10 @@ import { Structure } from "../../classes/Structure";
 import { padArray } from "../../helpers/displayHelpers";
 import { useGameEngine } from "../../hooks/useGameEngine";
 import { useStore } from "../../store/store";
+import GameIcon from "../common/GameIcon";
 import LabelledGrid from "../common/LabelledGrid";
+import JobTooltip from "../tooltips/JobTooltip";
+import LabelTooltip from "../tooltips/LabelTooltip";
 import JobIcon from "./JobIcon";
 import UpgradeIcon from "./UpgradeIcon";
 
@@ -14,18 +17,41 @@ export default function StructureActions({ str }: { str: Structure }) {
   const { state } = useStore();
   const actions = useGameEngine();
 
-  console.log(state.getList(str, "upgrades"));
+  const getJobState = (job: Job) => {
+    if (job.workers > 0) return "active";
+    else if (job.insufficient) return "warning";
+  };
 
   return (
     <Wrapper>
       <LabelledGrid cols={3} label="Upgrades" className="muted">
         {padArray(state.getList(str, "upgrades"), 9).map((upg: any | "x", i) => (
-          <UpgradeIcon key={i} upg={upg} />
+          <GameIcon
+            key={i}
+            itemData={upg}
+            tooltip={<LabelTooltip>{upg.name}</LabelTooltip>}
+            onClick={() => actions.build(upg, 1)}
+            state={(upg) => {
+              if (upg.builtCount > 0) return "built";
+              else return undefined;
+            }}
+          />
         ))}
       </LabelledGrid>
       <LabelledGrid cols={3} label="Jobs" className="jobs muted">
-        {padArray(state.getList(str, "jobs"), 6).map((job: Job | "x", i: number) => (
-          <JobIcon key={i} job={job} />
+        {padArray(state.getList(str, "jobs"), 6).map((job: Job, i: number) => (
+          <GameIcon
+            key={i}
+            itemData={job}
+            count={job.workers}
+            fontSize={12}
+            tooltip={<JobTooltip job={job} />}
+            onMouseDown={(e) => actions.setWorkers(job, 1, e)}
+            state={(job) => {
+              if (job.insufficient) return "warning";
+              else if (job.workers > 0) return "active";
+            }}
+          />
         ))}
       </LabelledGrid>
       <div className="muted"></div>

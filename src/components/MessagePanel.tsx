@@ -2,22 +2,25 @@ import React from "react";
 import styled, { css } from "styled-components";
 import tw from "twin.macro";
 import { Effect } from "../classes/Effect";
+import { Status } from "../classes/Status";
 import { padArray } from "../helpers/displayHelpers";
 import { useStore } from "../store/store";
+import GameIcon from "./common/GameIcon";
+import LabelTooltip from "./tooltips/LabelTooltip";
 
 export default function MessagePanel() {
   const { state } = useStore();
 
   return (
     <Wrapper>
-      <div className="global-effects">
+      <div className="global-statuses">
         <label>STATUSES & EFFECTS</label>
         <div>
           {padArray(
             state.data.statuses.filter((s) => s.isActive),
             12
-          ).map((eff: Effect | "x", i) => (
-            <div key={i}>{eff !== "x" && "X"}</div>
+          ).map((stat: Status, i: number) => (
+            <GameIcon key={i} itemData={stat} tooltip={<LabelTooltip>{stat.name}</LabelTooltip>} />
           ))}
         </div>
       </div>
@@ -58,8 +61,9 @@ const Wrapper = styled.div`
     }
   }
 
-  .global-effects {
+  .global-statuses {
     ${tw`mb-2`}
+
     > div {
       ${tw`grid w-full gap-1`}
       grid-template-columns: repeat(6, 1fr);
@@ -67,6 +71,10 @@ const Wrapper = styled.div`
       > div {
         aspect-ratio: 1;
         ${tw`bg-gray-200 rounded`}
+        img {
+          height: 16px;
+          width: 16px;
+        }
       }
     }
   }
@@ -74,7 +82,7 @@ const Wrapper = styled.div`
 
 const Message = styled.div<{ type }>`
   min-height: 10px;
-  ${tw`w-full rounded bg-gray-200 p-1`}
+  ${tw`w-full rounded bg-gray-200 p-1 mb-1`}
 
   ${({ type }) =>
     type === "warning" &&

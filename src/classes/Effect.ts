@@ -11,6 +11,7 @@ export class Effect {
   description: string = "";
   message: string = "";
   index: number = 0;
+  iconPath: string = "803";
 
   type = "effects" as keyof DataClasses;
   // engine: GameEngine;

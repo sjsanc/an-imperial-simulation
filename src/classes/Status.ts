@@ -18,6 +18,7 @@ export class Status {
   isActive: boolean = false;
   timeElapsed: number = 0;
   affectedItems: string[];
+  iconPath: string = "803";
 
   type = "status" as keyof DataClasses;
   statusType = "";
@@ -32,3 +33,8 @@ export class Status {
 // It can produce a Message when it starts or ends.
 // It has associated Effects which alter store state for its duraiton
 // Statuses are predefined and thus loaded as data
+
+// Status vs Effect
+// A status is some state that affects a job, or any event.
+// An effect is a modifier that alters the outcome of a particular job or event
+// A status is a collection of effects

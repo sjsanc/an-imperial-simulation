@@ -47,7 +47,7 @@ export default function StructuresPanel() {
         activeFilter === "all" ? str : str.structureType === activeFilter
       )
       .filter((str: Structure) => state.checkPrereqs(str) || str.isBuildable)
-      .sort((a, b) => (a.value < b.value && 1) || -1)
+      .sort((a, b) => (a.value > b.value && 1) || -1)
       .sort((a, b) => (a.builtCount < b.builtCount && 1) || -1);
   };
 
@@ -85,7 +85,7 @@ const Wrapper = styled.div`
   overflow: hidden;
   .structures {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     grid-gap: 6px;
 
     @media screen and (max-width: 1800px) {

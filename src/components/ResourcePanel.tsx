@@ -8,10 +8,17 @@ import { useStore } from "../store/store";
 import Tippy from "@tippyjs/react/headless";
 import ResourceTooltip from "./tooltips/ResourceTooltip";
 import { sortArray } from "../helpers/storeHelpers";
+import GameIcon from "./common/GameIcon";
 
 export default function ResourcePanel() {
   const { state, dispatch } = useStore();
   const actions = useGameEngine();
+
+  const filteredResources = () => {
+    let all = state.data.resources;
+    all = all.filter((res: Resource) => res.amount > 0);
+    return sortArray(all, "category");
+  };
 
   return (
     <Wrapper>
@@ -27,20 +34,18 @@ export default function ResourcePanel() {
         </div>
       </div>
       <div>
-        {sortArray(state.data.resources, "category").map((type, i) => (
+        {filteredResources().map((type, i) => (
           <div key={i} className="resource-wrapper">
             <label>{type[0]}</label>
             <div className="resource-grid">
               {type[1].map((res: Resource, i: number) => (
-                <Tippy
+                <GameIcon
                   key={i}
-                  placement="bottom"
-                  render={(attrs) => <ResourceTooltip {...attrs} res={res} />}>
-                  <div className="resource">
-                    <img src={`/assets/icons/ICON_${res.iconPath}.png`} />
-                    <div>{res.amount}</div>
-                  </div>
-                </Tippy>
+                  itemData={res}
+                  count={res.amount}
+                  fontSize={10}
+                  tooltip={<ResourceTooltip res={res} />}
+                />
               ))}
             </div>
           </div>

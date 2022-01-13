@@ -41,33 +41,6 @@ const compiledData = (classes: Map<string, any>) => {
 
 export const mainDataObject: DataObject = compiledData(classes);
 
-// export const mainDataObject: DataObject = {
-//   structures: {
-//     constructor: (x) => new Structure(x),
-//     data: data.structures,
-//   },
-//   upgrades: {
-//     constructor: (x) => new Upgrade(x),
-//     data: data.upgrades,
-//   },
-//   jobs: {
-//     constructor: (x) => new Job(x),
-//     data: data.jobs,
-//   },
-//   resources: {
-//     constructor: (x) => new Resource(x),
-//     data: data.resources,
-//   },
-//   effects: {
-//     constructor: (x) => new Effect(x),
-//     data: data.effects,
-//   },
-//   statuses: {
-//     constructor: (x) => new Status(x),
-//     data: data.statuses,
-//   },
-// };
-
 export class GameEngine {
   name = "";
   dispatchCount = 0;

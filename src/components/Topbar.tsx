@@ -14,7 +14,7 @@ import MediaQuery from "react-responsive";
 export default function Topbar({ debug, setDebug }: { debug: boolean; setDebug: any }) {
   const { state } = useStore();
   const actions = useGameEngine();
-  const currentYear = getYears(state.state.currentTick, state.config.yearLength);
+  const currentYear = getYears(state.state.currentTick, state.config.yearLength) + 1;
   const currentDay = getDays(state.state.currentTick, state.config.yearLength);
   const currentMonth = getMonth(state.state.currentTick, state.config.yearLength);
 

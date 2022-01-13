@@ -13,6 +13,7 @@ import tw from "twin.macro";
 import StructureEffects from "./StructureEffects";
 import { Resource } from "../../classes/Resource";
 import { Parcel } from "../../types/types";
+import ViewIcon from "../common/ViewIcon";
 
 // Topview = views, infobox, count
 // ACTIONS => upgrades, Jobs, cost, actions
@@ -48,14 +49,14 @@ export default function StructureDisplay({ str }: { str: Structure }) {
       <div className="infobox">
         <div className="view-selectors hidden">
           {views.map((v, i) => (
-            <Tippy
+            <ViewIcon
               key={i}
-              placement="bottom"
-              render={(attrs) => <LabelTooltip>{_.startCase(v)}</LabelTooltip>}>
-              <div data-view={v} onClick={setView}>
-                {icons[i]}
-              </div>
-            </Tippy>
+              data-view={v}
+              onClick={setView}
+              active={v === view}
+              label={_.startCase(v)}>
+              {icons[i]}
+            </ViewIcon>
           ))}
         </div>
         <div className="title">
@@ -112,17 +113,19 @@ const Wrapper = styled.div<{ strState }>`
     left: 0;
 
     button {
-      ${tw`bg-gray-500 border-0 px-3 py-2 rounded text-white font-medium cursor-pointer`}
+      ${tw`bg-gray-600 border-0 px-3 py-2 rounded text-white font-medium cursor-pointer`}
       &:hover {
         ${tw`bg-gray-600`}
       }
       &:disabled {
+        ${tw`bg-gray-400`}
         pointer-events: none;
       }
     }
 
     > div {
       max-width: 200px;
+      min-height: 28px;
       ${tw`flex mt-2 flex-wrap justify-center`}
     }
 
@@ -130,6 +133,8 @@ const Wrapper = styled.div<{ strState }>`
       ${tw`p-1 bg-gray-300 rounded flex items-center mr-1 mb-1 font-medium`}
       font-size: 12px;
       img {
+        height: 16px;
+        width: 16px;
         ${tw`mr-1`}
       }
     }

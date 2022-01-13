@@ -35,6 +35,8 @@ export class Structure implements Buildable {
 
   buildCost: Parcel[] = [];
 
+  fireRisk: number = 0; // contributes to total fire risk
+
   jobs: string[] = [];
   upgrades: string[] = [];
   effects: EffectReference[] = [];

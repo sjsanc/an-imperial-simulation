@@ -117,6 +117,7 @@ export const useGameEngine = () => {
           message: `${item.type} built`,
         },
       });
+      postMessage({ type: "warning", body: "You've built something" });
     } else {
       console.error("INSUFFICENT RESOURCE");
     }
@@ -265,5 +266,16 @@ export const useGameEngine = () => {
     });
   };
 
-  return { performJobs, tick, play, pause, build, destroy, setWorkers, calcBirths, feedPop };
+  return {
+    performJobs,
+    tick,
+    play,
+    pause,
+    build,
+    destroy,
+    setWorkers,
+    calcBirths,
+    feedPop,
+    postMessage,
+  };
 };

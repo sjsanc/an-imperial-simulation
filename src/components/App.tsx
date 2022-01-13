@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { getRandom } from "../helpers/storeHelpers";
 import { useGameEngine } from "../hooks/useGameEngine";
 import { useStore } from "../store/store";
 import "../styles/global.css";
@@ -14,9 +15,11 @@ import Topbar from "./Topbar";
 
 const panels = ["Structures", "Census", "Empire", "Research", "Military", "Allegiances", "Magic"];
 
+const flavourMessages = ["The night is dark and full of terrors..."];
+
 function App() {
   const [activePanel, setActivePanel] = useState<string>(panels[0]);
-  const [debug, setDebug] = useState<boolean>(true);
+  const [debug, setDebug] = useState<boolean>(false);
   const { state } = useStore();
   const actions = useGameEngine();
 
@@ -31,6 +34,10 @@ function App() {
 
         if (state.state.currentTick % 60 === 0) {
           actions.calcBirths();
+        }
+
+        if (state.state.currentTick % 120 === 0) {
+          actions.postMessage({ type: "basic", body: getRandom(flavourMessages) });
         }
       }
     }, state.config.gameSpeed);
@@ -92,7 +99,7 @@ const Wrapper = styled.div`
   }
 
   .overflow-panel {
-    height: 100vh;
+    height: 79vh;
     overflow-y: scroll;
     overflow-x: hidden;
     ${tw`pr-1`}

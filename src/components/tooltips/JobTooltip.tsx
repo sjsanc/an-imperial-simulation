@@ -6,9 +6,11 @@ import { Job } from "../../classes/Job";
 export default function JobTooltip({ job }: { job: Job }) {
   return (
     <Wrapper>
-      <label>JOB</label>
       <h4>{job.name}</h4>
+      <label>JOB</label>
+      {" ~ "}
       <p>{job.description}</p>
+      {" ~ "}
       <p>
         Consumes{" "}
         {job.costs.map(function (cost, i) {
@@ -28,8 +30,8 @@ export default function JobTooltip({ job }: { job: Job }) {
 const Wrapper = styled.div`
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%),
     0px 1px 3px 0px rgb(0 0 0 / 12%);
-  ${tw`p-2 rounded bg-white flex flex-col items-center`}
-  width: 110px;
+  ${tw`py-2 px-4 bg-white text-center flex flex-col items-center rounded`}
+  width: 150px;
 
   label {
     ${tw`text-gray-500 font-medium uppercase flex`}
@@ -39,7 +41,9 @@ const Wrapper = styled.div`
   h3 {
     ${tw`text-center`}
   }
+
   p {
     font-size: 11px;
+    font-style: italic;
   }
 `;

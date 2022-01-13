@@ -9,7 +9,7 @@ const structures: StructureProps[] = [
     description:
       "A primitive shelter made from sticks and mud, yet crucial for hiding from the harsh elements.",
     structureType: "housing",
-    value: 1,
+    value: 50,
     volume: 5,
     effects: [
       {
@@ -18,20 +18,20 @@ const structures: StructureProps[] = [
         multipliers: ["structures.0.builtCount"],
       },
     ],
-    buildCost: [["wood", 25]],
+    buildCost: [["wood", 50]],
   },
   {
     name: "cottage",
     description: "A cosy, familial home centered around a cheerful hearth.",
     structureType: "housing",
-    value: 3,
+    value: 60,
     volume: 12,
     upgrades: [],
     prereqs: {
       structures: ["hut"],
     },
     buildCost: [
-      ["wood", 50],
+      ["wood", 75],
       ["stone", 25],
     ],
   },
@@ -40,7 +40,7 @@ const structures: StructureProps[] = [
     structureType: "housing",
     description:
       "A densely packed rise of apartments. Efficient use of space; low quality of living. Attracts firebugs.",
-    value: 15,
+    value: 70,
     volume: 10,
     prereqs: {
       structures: ["cottage"],
@@ -58,7 +58,7 @@ const structures: StructureProps[] = [
       "A well-situated, lavishly appointed property. These manors serve as the residences of your city's finest.",
     structureType: "housing",
     volume: 35,
-    value: 25,
+    value: 80,
     prereqs: {
       structures: ["insulae"],
       research: ["arches & vaults"],
@@ -77,6 +77,8 @@ const structures: StructureProps[] = [
   {
     name: "farmstead",
     initials: "FS",
+    value: 5,
+    volume: 30,
     description:
       "The agricultural building blocks of any budding empire. Produces a range of essential goods.",
     jobs: ["grow wheat", "farm beets"],
@@ -92,52 +94,83 @@ const structures: StructureProps[] = [
     description:
       "A place to pull raw minerals from the earth. An unpleasant place to be after it rains.",
     structureType: "industry",
-    value: 10,
+    value: 20,
     volume: 50,
-    jobs: ["extract stone", "quarry clay", "extract marble"],
+    jobs: ["quarry stone", "quarry clay", "quarry marble"],
     prereqs: {
       structures: ["farmstead"],
       research: ["counterweights"],
     },
     buildCost: [
-      ["wood", 40],
-      ["stone", 20],
-      ["rivets", 20],
-      // ["machinery", 30],
+      ["wood", 80],
+      ["stone", 50],
     ],
   },
   {
     name: "mine",
+    description: "",
     structureType: "industry",
-    jobs: ["mine coal", "mine iron ore", "mine gold", "mine silver", "mine gemstones"],
+    value: 20,
+    volume: 30,
+    jobs: ["mine coal", "mine ore", "mine gemstones", "mine crystals"],
+    upgrades: ["heatshields", "immortal canaries", "trog guides"],
+    prereqs: {
+      structures: ["farmstead"],
+    },
     buildCost: [
-      ["wood", 40],
-      ["stone", 20],
-      ["rivets", 20],
-      // ["machinery", 30],
+      ["wood", 100],
+      ["stone", 50],
     ],
   },
   {
     name: "smelter",
+    description: "",
     structureType: "industry",
-    jobs: ["smelt iron", "smelt gold", "smelt silver", "smelt steel"],
+    value: 25,
+    volume: 20,
+    jobs: ["smelt iron", "smelt gold", "smelt silver", "smelt steel", "smelt mithril"],
+    upgrades: ["goblin techniques", "dwarven hammers", "arcanotrolysis"],
+    prereqs: {
+      structures: ["mine"],
+      research: ["metallurgy"],
+    },
+    buildCost: [
+      ["wood", 120],
+      ["stone", 50],
+      ["clay", 200],
+    ],
   },
 
   // ================================================================================= //
-  // Manufacturing
+  // Crafting
   // ================================================================================= //
   {
     name: "blacksmith",
     description: "A place to make iron nails and some such",
-    jobs: ["forge nails", "forge rebar"],
     structureType: "crafting",
+    jobs: ["forge rivets", "forge rebar"],
     upgrades: ["enchanted anvils"],
-    buildCost: [["wood", 20]],
+    prereqs: {
+      structures: ["smelter"],
+    },
+    buildCost: [
+      ["wood", 30],
+      ["stone", 15],
+      ["iron ingots", 30],
+    ],
   },
   {
     name: "stonecutter",
-    jobs: ["cut stone blocks", "cut marble blocks"],
     structureType: "crafting",
+    jobs: ["cut stone blocks", "cut marble blocks"],
+    prereqs: {
+      structures: ["quarry"],
+    },
+    buildCost: [
+      ["wood", 30],
+      ["stone", 15],
+      ["iron ingots", 20],
+    ],
   },
 
   // ================================================================================= //

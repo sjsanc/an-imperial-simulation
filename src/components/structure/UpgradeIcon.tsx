@@ -7,6 +7,7 @@ import { Job } from "../../classes/Job";
 import { useStore } from "../../store/store";
 import JobTooltip from "../tooltips/JobTooltip";
 import { Upgrade } from "../../classes/Upgrade";
+import LabelTooltip from "../tooltips/LabelTooltip";
 
 export default function UpgradeIcon({ upg }: { upg: Upgrade | "x" }) {
   const actions = useGameEngine();
@@ -14,7 +15,9 @@ export default function UpgradeIcon({ upg }: { upg: Upgrade | "x" }) {
   if (upg === "x") return <EmptyIcon />;
   else
     return (
-      <Tippy placement="bottom" render={(attrs) => <div>{upg.name}</div>}>
+      <Tippy
+        placement="bottom"
+        render={(attrs) => <LabelTooltip {...attrs}>{upg.name}</LabelTooltip>}>
         <Wrapper onClick={() => actions.build(upg, 1)} built={upg.builtCount > 0}>
           {upg.initials}
         </Wrapper>
@@ -37,3 +40,6 @@ const EmptyIcon = styled.div`
   aspect-ratio: 1;
   ${tw`bg-gray-200 rounded`}
 `;
+
+// UPGRADES SHOULDN@T BE SEPERATE FROM RESDRACH
+// INSTEAD, EACH RESEARCh, IF IT AFFECTS A STRUCTURE, SHOULD APPEAR ON THE STRUCTURE AS AN UPG
