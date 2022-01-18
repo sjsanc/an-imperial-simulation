@@ -10,17 +10,10 @@ import GameIcon from "../common/GameIcon";
 import LabelledGrid from "../common/LabelledGrid";
 import JobTooltip from "../tooltips/JobTooltip";
 import LabelTooltip from "../tooltips/LabelTooltip";
-import JobIcon from "./JobIcon";
-import UpgradeIcon from "./UpgradeIcon";
 
 export default function StructureActions({ str }: { str: Structure }) {
   const { state } = useStore();
   const actions = useGameEngine();
-
-  const getJobState = (job: Job) => {
-    if (job.workers > 0) return "active";
-    else if (job.insufficient) return "warning";
-  };
 
   return (
     <Wrapper>
@@ -54,7 +47,6 @@ export default function StructureActions({ str }: { str: Structure }) {
           />
         ))}
       </LabelledGrid>
-      <div className="muted"></div>
       <LabelledGrid cols={1} label="Actions" className="actions muted">
         <button onClick={() => actions.build(str, 1)}>BUILD</button>
         <button onClick={() => actions.destroy(str, 1)}>DEMOLISH</button>
@@ -66,7 +58,7 @@ export default function StructureActions({ str }: { str: Structure }) {
 
 const Wrapper = styled.div`
   ${tw`grid gap-1`}
-  grid-template-columns: 120px 180px auto 90px;
+  grid-template-columns: 120px 180px 90px;
 
   > div {
     ${tw`bg-gray-100 rounded p-1`}

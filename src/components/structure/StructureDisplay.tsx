@@ -101,9 +101,16 @@ export default function StructureDisplay({ str }: { str: Structure }) {
 }
 
 const Wrapper = styled.div<{ strState }>`
-  ${tw`flex flex-col p-1 rounded relative`}
+  ${tw`flex flex-col p-1 rounded relative mr-2 mb-2`}
   box-shadow: 0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%),
     0px 1px 3px 0px rgb(0 0 0 / 12%);
+  width: 406px;
+  border: 1px solid transparent;
+
+  &:hover {
+    /* ${tw``} */
+    border: 1px solid #d5d5d5;
+  }
 
   .initial-build {
     ${tw`flex flex-col items-center justify-center absolute`}
@@ -172,7 +179,7 @@ const Wrapper = styled.div<{ strState }>`
     }
     p {
       font-style: italic;
-      font-size: 12px;
+      font-size: 11px;
     }
     .icon,
     .count {

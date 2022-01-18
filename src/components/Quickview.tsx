@@ -1,5 +1,4 @@
-import Tippy from "@tippyjs/react/headless";
-import React, { useState } from "react";
+import React from "react";
 import { Command, Framer } from "react-feather";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -7,8 +6,8 @@ import { useGameEngine } from "../hooks/useGameEngine";
 import { Job } from "../classes/Job";
 import { useViews } from "../hooks/useViews";
 import { useStore } from "../store/store";
-import JobIcon from "./structure/JobIcon";
 import JobTooltip from "./tooltips/JobTooltip";
+import GameIcon from "./common/GameIcon";
 
 export default function Quickview() {
   const { state } = useStore();
@@ -33,7 +32,20 @@ export default function Quickview() {
             <div className="jobs-view">
               {activeJobs.length > 0 ? (
                 activeJobs.map((job: Job, i: number) => {
-                  return <JobIcon job={job} key={i} />;
+                  return (
+                    <GameIcon
+                      key={i}
+                      itemData={job}
+                      count={job.workers}
+                      fontSize={12}
+                      tooltip={<JobTooltip job={job} />}
+                      onMouseDown={(e) => actions.setWorkers(job, 1, e)}
+                      state={(job) => {
+                        if (job.insufficient) return "warning";
+                        else if (job.workers > 0) return "active";
+                      }}
+                    />
+                  );
                 })
               ) : (
                 <p>No active jobs</p>

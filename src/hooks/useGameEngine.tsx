@@ -270,6 +270,7 @@ export const useGameEngine = () => {
     performJobs,
     tick,
     play,
+    flip,
     pause,
     build,
     destroy,

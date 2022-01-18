@@ -28,8 +28,6 @@ export default function StructuresPanel() {
     setActiveFilter(e.currentTarget.getAttribute("data-filter") as string);
   };
 
-  // const activeJobs = state.getData("jobs", (x: Job) => x.workers > 0);
-
   // Filters the structure types to only show buildable structures
   const possibleStructureFilters = () => {
     const activeTypes = _.uniq(
@@ -84,17 +82,10 @@ export default function StructuresPanel() {
 const Wrapper = styled.div`
   overflow: hidden;
   .structures {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-gap: 6px;
-
-    @media screen and (max-width: 1800px) {
-      grid-template-columns: 1fr 1fr;
-    }
-
-    @media screen and (max-width: 1400px) {
-      grid-template-columns: 1fr;
-    }
+    display: flex; 
+    flex-wrap: wrap;
+    justify-content: center;
+  }
   }
 
   label {

@@ -8,6 +8,7 @@ import "../styles/global.css";
 import Debugger from "./Debugger";
 import EmpirePanel from "./EmpirePanel";
 import MessagePanel from "./MessagePanel";
+import WikiModal from "./modals/WikiModal";
 import Quickview from "./Quickview";
 import ResourcePanel from "./ResourcePanel";
 import StructuresPanel from "./structure/StructuresPanel";
@@ -78,6 +79,7 @@ function App() {
         <MessagePanel />
       </Main>
       <Debugger active={debug} setActive={setDebug} />
+      <WikiModal active={state.miscState.wikiOpen} />
     </Wrapper>
   );
 }

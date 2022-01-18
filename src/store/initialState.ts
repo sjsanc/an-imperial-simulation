@@ -64,6 +64,10 @@ export class GameEngine {
     gameSpeed: 1000,
     startPop: 5,
   };
+  miscState = {
+    wikiOpen: false,
+    debugOpen: false,
+  };
   data = {} as DataClasses;
 
   constructor(data: any) {

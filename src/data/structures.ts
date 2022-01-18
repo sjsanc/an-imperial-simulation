@@ -36,6 +36,24 @@ const structures: StructureProps[] = [
     ],
   },
   {
+    name: "townhouse",
+    structureType: "housing",
+    description:
+      "A modest home with enough space for a hardworking city family and perhaps a servant or two.",
+    value: 55,
+    volume: 20,
+    upgrades: [],
+    prereqs: {
+      structures: ["cottage"],
+      research: ["scaffolding", "city planning"],
+    },
+    buildCost: [
+      ["wood", 100],
+      ["stone", 70],
+      ["rivets", 30],
+    ],
+  },
+  {
     name: "insulae",
     structureType: "housing",
     description:
@@ -44,7 +62,7 @@ const structures: StructureProps[] = [
     volume: 10,
     prereqs: {
       structures: ["cottage"],
-      research: ["scaffolding"],
+      research: ["scaffolding", "city planning"],
     },
     buildCost: [
       ["wood", 120],
@@ -82,7 +100,7 @@ const structures: StructureProps[] = [
     description:
       "The agricultural building blocks of any budding empire. Produces a range of essential goods.",
     jobs: ["grow wheat", "farm beets"],
-    structureType: "industry",
+    structureType: "material",
     upgrades: ["ensorcelled beehives"],
     buildCost: [
       ["wood", 30],
@@ -90,16 +108,24 @@ const structures: StructureProps[] = [
     ],
   },
   {
+    name: "ranger's lodge",
+    description: "",
+    structureType: "material",
+    jobs: ["forage", "hunt woodland beasts", "hunt bog beasts", "hunt darkwood beasts"],
+    upgrades: [],
+    buildCost: [],
+  },
+  {
     name: "quarry",
     description:
       "A place to pull raw minerals from the earth. An unpleasant place to be after it rains.",
-    structureType: "industry",
+    structureType: "material",
     value: 20,
     volume: 50,
     jobs: ["quarry stone", "quarry clay", "quarry marble"],
     prereqs: {
       structures: ["farmstead"],
-      research: ["counterweights"],
+      research: ["scaffolding"],
     },
     buildCost: [
       ["wood", 80],
@@ -109,26 +135,37 @@ const structures: StructureProps[] = [
   {
     name: "mine",
     description: "",
-    structureType: "industry",
+    structureType: "material",
     value: 20,
     volume: 30,
     jobs: ["mine coal", "mine ore", "mine gemstones", "mine crystals"],
     upgrades: ["heatshields", "immortal canaries", "trog guides"],
     prereqs: {
       structures: ["farmstead"],
+      research: ["scaffolding"],
     },
     buildCost: [
       ["wood", 100],
       ["stone", 50],
     ],
   },
+  // ================================================================================= //
+  // Crafting
+  // ================================================================================= //
   {
     name: "smelter",
     description: "",
-    structureType: "industry",
+    structureType: "crafting",
     value: 25,
     volume: 20,
-    jobs: ["smelt iron", "smelt gold", "smelt silver", "smelt steel", "smelt mithril"],
+    jobs: [
+      "smelt iron ingots",
+      "smelt steel ingots",
+      "smelt gold ingots",
+      "smelt silver ingots",
+      "smelt mithril ingots",
+      "smelt dragonscale ingots",
+    ],
     upgrades: ["goblin techniques", "dwarven hammers", "arcanotrolysis"],
     prereqs: {
       structures: ["mine"],
@@ -140,12 +177,8 @@ const structures: StructureProps[] = [
       ["clay", 200],
     ],
   },
-
-  // ================================================================================= //
-  // Crafting
-  // ================================================================================= //
   {
-    name: "blacksmith",
+    name: "forge",
     description: "A place to make iron nails and some such",
     structureType: "crafting",
     jobs: ["forge rivets", "forge rebar"],
@@ -160,6 +193,23 @@ const structures: StructureProps[] = [
     ],
   },
   {
+    name: "armoury",
+    description: "",
+    structureType: "crafting",
+    jobs: [
+      "forge iron blades",
+      "forge steel blades",
+      "forge mithril blades",
+      "forge iron armor",
+      "forge steel armor",
+      "forge mithril armor",
+    ],
+    upgrades: [""],
+    prereqs: {
+      structures: ["forge"],
+    },
+  },
+  {
     name: "stonecutter",
     structureType: "crafting",
     jobs: ["cut stone blocks", "cut marble blocks"],
@@ -172,7 +222,11 @@ const structures: StructureProps[] = [
       ["iron ingots", 20],
     ],
   },
-
+  {
+    name: "tannery",
+    structureType: "crafting",
+    jobs: ["tan hides"],
+  },
   // ================================================================================= //
   // Civil
   // ================================================================================= //
@@ -203,3 +257,9 @@ const structures: StructureProps[] = [
 ];
 
 export default structures;
+
+// JOBS?
+// Jobs might have configurable properties to make them more interesting.
+// For example, late game, "forge iron sword" becomes a bit useless if the progression is standard iron => steel
+// Instead, "forge sword" with configurable resource consumption might be better from a gameplay standpoint
+// "Forge blades" => producing 1 iron blade, 1 steel and 1 mithril per turn?

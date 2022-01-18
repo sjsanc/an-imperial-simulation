@@ -48,7 +48,7 @@ interface Buildable extends Item {
 type StructureTypes =
   | "all"
   | "housing"
-  | "industry"
+  | "material"
   | "crafting"
   | "civil"
   | "military"

@@ -24,7 +24,12 @@ export default function Topbar({ debug, setDebug }: { debug: boolean; setDebug: 
         <h1>AN IMPERIAL SIMULATION</h1>
         <MediaQuery minWidth={1200}>
           <button>About</button>
-          <button>Wiki</button>
+          <button
+            onClick={() => {
+              actions.flip(`miscState.wikiOpen`, !state.miscState.wikiOpen);
+            }}>
+            Wiki
+          </button>
           <button>Credits</button>
           <button onClick={() => setDebug(!debug)}>Debug</button>
         </MediaQuery>
