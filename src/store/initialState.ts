@@ -47,22 +47,27 @@ export class GameEngine {
   state = {
     isRunning: false,
     currentTick: 0,
-    empire: {
-      populationCap: 0,
-      sanitation: 0,
-      fertility: 5,
-      loyalty: 0,
-      piety: 0,
-      constitution: 0,
-      learnedness: 0,
-    },
-    // globalStatuses: [] as Status[],
     messages: [] as Message[],
+    empire: {
+      primary: {
+        sanitation: 0,
+        fertility: 5,
+        loyalty: 0,
+        piety: 0,
+        constitution: 0,
+        learnedness: 0,
+      },
+      secondary: {
+        settlementLevel: 0,
+        populationCap: 0,
+      },
+    },
   };
   config = {
     yearLength: 120,
     gameSpeed: 1000,
     startPop: 5,
+    empireName: "Test Empire",
   };
   miscState = {
     wikiOpen: false,

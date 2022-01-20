@@ -6,24 +6,33 @@ import LabelTooltip from "../tooltips/LabelTooltip";
 
 interface ViewProps extends React.ComponentPropsWithoutRef<"div"> {
   active: boolean;
-  label: string;
+  label?: string;
+  bg?: string;
 }
 
 export const ViewIcon: React.FC<ViewProps> = (props) => {
   return (
     <Tippy
       placement="bottom"
-      render={(attrs) => <LabelTooltip {...attrs}>{props.label}</LabelTooltip>}>
-      <Icon active={props.active} {...props}>
+      render={(attrs) => props.label && <LabelTooltip {...attrs}>{props.label}</LabelTooltip>}>
+      <Icon active={props.active} bg={props.bg} {...props} className="view-icon">
         {props.children}
       </Icon>
     </Tippy>
   );
 };
 
-const Icon = styled.div<{ active }>`
+const Icon = styled.div<{ active; bg }>`
   ${(props) =>
-    props.active
+    props.active && !props.bg
+      ? css`
+          ${tw`bg-gray-200`}
+        `
+      : ""}
+  background: ${(props) =>
+    props.active && props.bg
+      ? props.bg
+      : props.active && !props.bg
       ? css`
           ${tw`bg-gray-200`}
         `

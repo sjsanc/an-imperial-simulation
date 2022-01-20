@@ -31,7 +31,12 @@ export default function Topbar({ debug, setDebug }: { debug: boolean; setDebug: 
             Wiki
           </button>
           <button>Credits</button>
-          <button onClick={() => setDebug(!debug)}>Debug</button>
+          <button
+            onClick={() => {
+              actions.flip(`miscState.debugOpen`, !state.miscState.debugOpen);
+            }}>
+            Debug
+          </button>
         </MediaQuery>
         <MediaQuery maxWidth={1200}>
           <div className="menu-burger">

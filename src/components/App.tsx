@@ -5,16 +5,16 @@ import { getRandom } from "../helpers/storeHelpers";
 import { useGameEngine } from "../hooks/useGameEngine";
 import { useStore } from "../store/store";
 import "../styles/global.css";
-import Debugger from "./Debugger";
 import EmpirePanel from "./EmpirePanel";
 import MessagePanel from "./MessagePanel";
+import DebugModal from "./modals/DebugModal";
 import WikiModal from "./modals/WikiModal";
 import Quickview from "./Quickview";
 import ResourcePanel from "./ResourcePanel";
 import StructuresPanel from "./structure/StructuresPanel";
 import Topbar from "./Topbar";
 
-const panels = ["Structures", "Census", "Empire", "Research", "Military", "Allegiances", "Magic"];
+const panels = ["Structures", "Empire", "Census", "Research", "Military", "Allegiances", "Magic"];
 
 const flavourMessages = ["The night is dark and full of terrors..."];
 
@@ -53,7 +53,7 @@ function App() {
     switch (activePanel) {
       case panels[0]:
         return <StructuresPanel />;
-      case panels[2]:
+      case panels[1]:
         return <EmpirePanel />;
     }
   };
@@ -78,8 +78,8 @@ function App() {
         </CentrePanel>
         <MessagePanel />
       </Main>
-      <Debugger active={debug} setActive={setDebug} />
-      <WikiModal active={state.miscState.wikiOpen} />
+      <DebugModal />
+      <WikiModal />
     </Wrapper>
   );
 }
@@ -91,6 +91,7 @@ const Wrapper = styled.div`
   width: 100vw;
   background: #f0f0f0;
   overflow: hidden;
+  min-width: 1360px;
 
   .increase {
     ${tw`text-green-500`}

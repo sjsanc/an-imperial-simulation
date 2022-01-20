@@ -72,7 +72,3 @@ IMPSIM TODO
 > Count dictates job capacity in most cases. A count of 3 allows for 3 workers per job, unless specified otherwise.
 > If output box overflows, click to revela total output
 > Structures can have either/or upgrades that come in pairs and lock the other out
-
-# STAGES
-
-1. Early Game

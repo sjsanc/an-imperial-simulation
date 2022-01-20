@@ -9,6 +9,7 @@ const lastNames = ["Nefer", "Juul", "Kong"];
 
 export class Citizen {
   name: string = "";
+  type = "citizen";
   role: "noble" | "soldier" | "hero" | "worker" | "invalid" | "child" = "worker";
   temper: "sanguine" | "choleric" | "phlegmatic" | "melancholic" = "sanguine";
   birthTick: number = 0;

@@ -1,9 +1,8 @@
 import { useState } from "react";
 
-export const useViews = (
-  views: string[],
-  defaultView?: string
-): [string, (e: React.MouseEvent) => void] => {
+export type ViewController = [string, (e: React.MouseEvent) => void, string[]];
+
+export const useViews = (views: string[], defaultView?: string): ViewController => {
   const [view, _setView] = useState<string>(defaultView || views[0]);
 
   const setView = (e: React.MouseEvent) => {
@@ -18,5 +17,5 @@ export const useViews = (
     }
   };
 
-  return [view, setView];
+  return [view, setView, views];
 };
